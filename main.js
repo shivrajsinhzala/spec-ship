@@ -111,7 +111,28 @@
 
     /* ---------------- misc ---------------- */
     var form = one('[data-comment-form]');
-    if (form) on(form, 'submit', function (e) { e.preventDefault(); var b = form.querySelector('button'); if (b) b.textContent = 'Wire this to your inbox ✓'; });
+    if (form) on(form, 'submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('[data-submit]'), note = form.querySelector('[data-form-note]');
+      var label = btn ? btn.textContent : '';
+      var say = function (t, err) { if (note) { note.textContent = t; note.classList.toggle('is-err', !!err); } };
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      if (btn) { btn.disabled = true; btn.textContent = 'Posting…'; }
+      say('');
+      // Sent as multipart/form-data (no JSON) to avoid a CORS preflight Web3Forms doesn't answer
+      fetch(form.getAttribute('action'), { method: 'POST', body: new FormData(form) })
+        .then(function (r) {
+          if (r.status !== 200) throw new Error('status ' + r.status);
+          form.reset();
+          say('✓ Comment posted — I’ll reply within a day.');
+          if (btn) btn.textContent = 'Posted ✓';
+        })
+        .catch(function () {
+          say('Couldn’t send — email hello@shivrajsinh.in instead.', true);
+          if (btn) btn.textContent = label;
+        })
+        .then(function () { if (btn) setTimeout(function () { btn.disabled = false; btn.textContent = label; }, 4000); });
+    });
 
     /* ================= MOTION ================= */
     var vh = window.innerHeight, docH = document.documentElement.scrollHeight;

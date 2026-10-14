@@ -438,3 +438,6 @@
 @media (prefers-reduced-motion: reduce) {
   .ss *, .ss *::before, .ss *::after { transition: none !important; }
 }
+.ss .form-note { margin: 0; min-height: 1.4em; font: 500 13px/1.4 var(--mono); }
+.ss .form-note.is-err { color: #C2261B; }
+.ss .props dd a { text-decoration: underline; text-underline-offset: 3px; }
