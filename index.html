@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shivrajsinh Zala — Next Stop</title>
+<meta name="description" content="Frontend developer in Rajkot building fast, animated websites. Portfolio redesign preview.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FFE900">
+<link rel="icon" href="portrait.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>
+:root{--accent:#FFE900;--sh:6px 6px 0 #121212;--sh-sm:4px 4px 0 #121212;--sh-lg:10px 10px 0 #121212;--sh-accent:6px 6px 0 var(--accent),6px 6px 0 3px #121212;--sh-accent-lg:10px 10px 0 var(--accent),10px 10px 0 3px #121212;--sh-blue:4px 4px 0 #2E4BFF;--gz-min:760px;--hz-dir:row;--hz-w:max-content;--ticket-w:min(1080px,80vw);--blinds-h:820px}
+html,body{margin:0;background:#F3F0E6}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.only-wide,.only-narrow,.only-rail{display:contents}
+[hidden]{display:none!important}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2E4BFF;outline-offset:3px}
+[data-flip-ch]{backface-visibility:hidden;will-change:transform}
+@media (max-width:819px){:root{--gz-min:420px;--hz-dir:column;--hz-w:100%;--ticket-w:100%;--blinds-h:560px}.only-wide{display:none!important}}
+@media (min-width:820px){.only-narrow{display:none!important}}
+@media (max-width:1359px){.only-rail{display:none!important}}
+</style>
+</head>
+<body>
+<div  style="font-family: 'Archivo', 'Helvetica Neue', system-ui, sans-serif; color: #121212; background-color: #F3F0E6; background-image: linear-gradient(rgba(18,18,18,0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(18,18,18,0.055) 1px, transparent 1px); background-size: 32px 32px; min-height: 100%; overflow-x: hidden; position: relative">
+
+<!-- ===== PRELOADER: split-flap counter (live view only) ===== -->
+<div data-preloader aria-hidden="true" style="position: fixed; inset: 0; z-index: 100; visibility: hidden; background: #121212; color: var(--accent); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; padding: 24px">
+<div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase">Now boarding — shivrajsinh.in</div>
+<div style="display: flex; gap: 10px">
+<span style="position: relative; width: clamp(72px, 12vw, 150px); aspect-ratio: 3 / 4; background: #1E1E1C; border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden"><span data-pre-digit style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(64px, 11vw, 140px); line-height: 1">0</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1px; background: #0B0B0A"></span></span>
+<span style="position: relative; width: clamp(72px, 12vw, 150px); aspect-ratio: 3 / 4; background: #1E1E1C; border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden"><span data-pre-digit style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(64px, 11vw, 140px); line-height: 1">0</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1px; background: #0B0B0A"></span></span>
+<span style="position: relative; width: clamp(72px, 12vw, 150px); aspect-ratio: 3 / 4; background: #1E1E1C; border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden"><span data-pre-digit style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(64px, 11vw, 140px); line-height: 1">0</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1px; background: #0B0B0A"></span></span>
+</div>
+<div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #A9A59A">Gate 02 · Morbi → Rajkot · Please mind the gap</div>
+</div>
+
+<!-- ===== CURSOR FOLLOWER ===== -->
+<div data-cursor aria-hidden="true" style="position: fixed; top: 0; left: 0; z-index: 90; width: 16px; height: 16px; border: 2px solid #121212; background: var(--accent); border-radius: 50%; pointer-events: none; visibility: hidden; display: flex; align-items: center; justify-content: center; overflow: hidden">
+<span data-cursor-label style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; text-transform: uppercase; visibility: hidden; white-space: nowrap">View ↗</span>
+</div>
+
+<!-- ===== ROUTE RAIL: bus marker travels between section stops ===== -->
+<div class="only-rail">
+<nav data-rail aria-label="Route" style="position: fixed; right: 22px; top: 50%; transform: translateY(-50%); z-index: 35; visibility: hidden; display: flex; align-items: stretch; gap: 0">
+<div data-rail-track style="position: relative; width: 22px; height: 380px; display: flex; flex-direction: column; justify-content: space-between; align-items: center">
+<span aria-hidden="true" style="position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; margin-left: -1.5px; background: #121212"></span>
+
+<a data-stop data-target="#top" href="#top" aria-label="01 Depart" style="position: relative; display: block; width: 14px; height: 14px; border: 3px solid #121212; background: #F3F0E6; box-sizing: content-box"><span data-stop-label style="position: absolute; right: 26px; top: 50%; transform: translateY(-50%); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; white-space: nowrap; background: #121212; color: #F3F0E6; padding: 3px 7px; visibility: hidden">01 Depart</span></a>
+
+<a data-stop data-target="#work" href="#work" aria-label="02 Work" style="position: relative; display: block; width: 14px; height: 14px; border: 3px solid #121212; background: #F3F0E6; box-sizing: content-box"><span data-stop-label style="position: absolute; right: 26px; top: 50%; transform: translateY(-50%); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; white-space: nowrap; background: #121212; color: #F3F0E6; padding: 3px 7px; visibility: hidden">02 Work</span></a>
+
+<a data-stop data-target="#featured" href="#featured" aria-label="03 Routes" style="position: relative; display: block; width: 14px; height: 14px; border: 3px solid #121212; background: #F3F0E6; box-sizing: content-box"><span data-stop-label style="position: absolute; right: 26px; top: 50%; transform: translateY(-50%); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; white-space: nowrap; background: #121212; color: #F3F0E6; padding: 3px 7px; visibility: hidden">03 Routes</span></a>
+
+<a data-stop data-target="#index" href="#index" aria-label="04 Index" style="position: relative; display: block; width: 14px; height: 14px; border: 3px solid #121212; background: #F3F0E6; box-sizing: content-box"><span data-stop-label style="position: absolute; right: 26px; top: 50%; transform: translateY(-50%); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; white-space: nowrap; background: #121212; color: #F3F0E6; padding: 3px 7px; visibility: hidden">04 Index</span></a>
+
+<a data-stop data-target="#about" href="#about" aria-label="05 Driver" style="position: relative; display: block; width: 14px; height: 14px; border: 3px solid #121212; background: #F3F0E6; box-sizing: content-box"><span data-stop-label style="position: absolute; right: 26px; top: 50%; transform: translateY(-50%); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; white-space: nowrap; background: #121212; color: #F3F0E6; padding: 3px 7px; visibility: hidden">05 Driver</span></a>
+
+<a data-stop data-target="#life" href="#life" aria-label="06 Off-screen" style="position: relative; display: block; width: 14px; height: 14px; border: 3px solid #121212; background: #F3F0E6; box-sizing: content-box"><span data-stop-label style="position: absolute; right: 26px; top: 50%; transform: translateY(-50%); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; white-space: nowrap; background: #121212; color: #F3F0E6; padding: 3px 7px; visibility: hidden">06 Off-screen</span></a>
+
+<a data-stop data-target="#contact" href="#contact" aria-label="07 Arrive" style="position: relative; display: block; width: 14px; height: 14px; border: 3px solid #121212; background: #F3F0E6; box-sizing: content-box"><span data-stop-label style="position: absolute; right: 26px; top: 50%; transform: translateY(-50%); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; white-space: nowrap; background: #121212; color: #F3F0E6; padding: 3px 7px; visibility: hidden">07 Arrive</span></a>
+
+<span data-rail-bus aria-hidden="true" style="position: absolute; top: 0; left: 50%; margin-left: -13px; width: 26px; height: 20px; background: var(--accent); border: 3px solid #121212; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 8px; font-weight: 600">SZ</span>
+</div>
+</nav>
+</div>
+
+<!-- ===== NAV ===== -->
+<header data-nav style="position: sticky; top: 0; z-index: 30; background: #F3F0E6; border-bottom: 3px solid #121212">
+<div style="max-width: 1280px; margin: 0 auto; padding: 12px clamp(16px, 4vw, 48px); display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" style="text-decoration: none; background: #121212; color: var(--accent); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: 15px; padding: 8px 12px; border: 3px solid #121212">SZ://DEV</a>
+<div class="only-wide">
+<div style="display: flex; align-items: center; gap: 10px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em">
+<span style="width: 9px; height: 9px; background: #12A150; border: 1.5px solid #121212; border-radius: 50%"></span>
+<span>Rajkot <span data-clock>--:--</span> IST</span>
+<span style="color: #6B675D">·</span>
+<span>Available for projects</span>
+</div>
+</div>
+<div style="display: flex; align-items: center; gap: 22px">
+<div class="only-wide">
+<nav aria-label="Primary" style="display: flex; align-items: center; gap: 22px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em">
+<a href="#work" style="color: #121212; text-decoration: none">Work</a>
+<a href="#index" style="color: #121212; text-decoration: none">Index</a>
+<a href="#about" style="color: #121212; text-decoration: none">About</a>
+</nav>
+</div>
+<a href="#contact" data-magnetic style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; color: #121212; text-decoration: none; text-transform: uppercase; background: var(--accent); border: 3px solid #121212; padding: 9px 14px; box-shadow: var(--sh-sm)">Book a seat →</a>
+<div class="only-narrow">
+<button type="button" data-menu-toggle aria-expanded="false" aria-label="Open menu" style="width: 46px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; background: #FFFFFF; border: 3px solid #121212; cursor: pointer; padding: 0">
+<span style="width: 18px; height: 3px; background: #121212"></span>
+<span style="width: 18px; height: 3px; background: #121212"></span>
+</button>
+</div>
+</div>
+</div>
+<div id="mobileMenu" class="only-narrow" hidden>
+<nav aria-label="Mobile" style="border-top: 3px solid #121212; display: flex; flex-direction: column; background: #121212">
+<a href="#work" data-menu-close style="color: #F3F0E6; text-decoration: none; font-size: 34px; font-weight: 900; font-stretch: 112%; text-transform: uppercase; padding: 14px 16px; border-bottom: 1px solid #333">Work</a>
+<a href="#index" data-menu-close style="color: #F3F0E6; text-decoration: none; font-size: 34px; font-weight: 900; font-stretch: 112%; text-transform: uppercase; padding: 14px 16px; border-bottom: 1px solid #333">Index</a>
+<a href="#about" data-menu-close style="color: #F3F0E6; text-decoration: none; font-size: 34px; font-weight: 900; font-stretch: 112%; text-transform: uppercase; padding: 14px 16px; border-bottom: 1px solid #333">About</a>
+<a href="#contact" data-menu-close style="color: var(--accent); text-decoration: none; font-size: 34px; font-weight: 900; font-stretch: 112%; text-transform: uppercase; padding: 14px 16px">Contact ↗</a>
+</nav>
+</div>
+</header>
+
+<!-- ===== HERO: departure board + boarding pass ===== -->
+<section id="top" style="max-width: 1280px; margin: 0 auto; padding: clamp(28px, 4vw, 56px) clamp(16px, 4vw, 48px) clamp(64px, 8vw, 112px); display: flex; flex-direction: column; gap: clamp(32px, 4vw, 56px)">
+<h1 style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0">Shivrajsinh Zala — Frontend Developer, Rajkot</h1>
+
+<div data-board style="background: #121212; border: 3px solid #121212; box-shadow: var(--sh-accent); padding: clamp(12px, 2vw, 26px); display: flex; flex-direction: column; gap: clamp(8px, 1vw, 14px)" aria-hidden="true">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: clamp(10px, 0.95vw, 13px); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8F8B80; padding-bottom: 4px">
+<span><span style="color: var(--accent)">■</span> Departures</span>
+<span>Platform 01</span>
+<span>Route Morbi → Rajkot</span>
+<span>Status <span style="color: #3DDC84">● On time</span></span>
+</div>
+<div style="display: flex; gap: clamp(3px, 0.5vw, 8px)">
+
+<span data-flip data-char="S" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">S</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="H" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">H</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="I" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">I</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="V" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">V</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="R" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">R</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="A" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">A</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="J" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">J</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="S" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">S</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="I" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">I</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="N" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">N</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="H" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">H</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+</div>
+<div style="display: flex; gap: clamp(3px, 0.5vw, 8px)">
+
+<span data-flip data-char="Z" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">Z</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="A" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">A</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="L" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">L</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-char="A" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(20px, 6.1vw, 88px); line-height: 1; color: var(--accent)">A</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; background: #1E1E1C; border-radius: 4px"><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+<span data-board-tag style="flex: 6 6 0; min-width: 0; background: var(--accent); color: #121212; border-radius: 4px; display: flex; flex-direction: column; justify-content: center; gap: 0.35em; padding: 0 clamp(8px, 1.6vw, 24px); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: clamp(8px, 1.25vw, 18px); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.2">
+<span style="font-family: 'Archivo', sans-serif; font-weight: 900; font-stretch: 112%; font-size: 1.9em; letter-spacing: -0.01em; line-height: 0.95">Frontend developer</span>
+<span>Just Digital Gurus · Rajkot</span>
+</span>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; border-top: 2px solid #2A2A28; padding-top: clamp(8px, 1vw, 14px); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: clamp(10px, 0.95vw, 13px); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #CFCBBF">
+<span>Destination: <span style="color: var(--accent)">your next website</span></span>
+<span>Via: WordPress · Webflow · React · GSAP</span>
+<span>Boarding: <span style="color: #3DDC84">now</span></span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: clamp(40px, 6vw, 88px); align-items: center">
+<div style="display: flex; flex-direction: column; gap: 32px">
+<p data-hero-fade style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em">Stop 01 — Departure</p>
+<p data-hero-fade style="margin: 0; font-weight: 800; font-stretch: 100%; font-size: clamp(28px, 3.3vw, 48px); line-height: 1.08; letter-spacing: -0.01em; text-wrap: balance">I build fast, animated websites for real clients — and the apps I need on my daily bus ride.</p>
+<p data-hero-fade style="margin: 0; font-size: clamp(17px, 1.3vw, 19px); line-height: 1.55; max-width: 46ch; color: #3A3832">Frontend developer at Just Digital Gurus, Rajkot. WordPress, Squarespace, Webflow and Shopify for clients; React, Next.js, Astro and GSAP when it has to move.</p>
+<div data-hero-fade style="display: flex; flex-wrap: wrap; gap: 14px">
+<a href="#contact" data-magnetic style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 26px; background: #121212; color: var(--accent); border: 3px solid #121212; box-shadow: var(--sh-accent); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none">Book a seat →</a>
+<a href="#work" data-magnetic style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 26px; background: #FFFFFF; color: #121212; border: 3px solid #121212; box-shadow: var(--sh-sm); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none">See the route ↓</a>
+</div>
+</div>
+
+<!-- Boarding pass -->
+<div data-ticket data-cursor-view data-cursor-text="Hi ✦" style="position: relative; justify-self: center; width: 100%; max-width: 560px; transform: rotate(-2.5deg)">
+<div style="background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-lg); display: flex; flex-direction: column">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 18px; background: #121212; color: var(--accent); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase">
+<span>Boarding pass</span>
+<span>SZ://DEV</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr))">
+<div style="aspect-ratio: 1 / 1; overflow: hidden; border-right: 3px solid #121212; border-bottom: 3px solid #121212; margin: 0 -3px -3px 0; background: var(--accent); position: relative">
+<img data-ticket-img src="portrait.webp" alt="Shivrajsinh Zala, black-and-white cutout portrait on yellow" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block">
+</div>
+<dl style="margin: 0; padding: 18px 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; align-content: center; font-family: 'IBM Plex Mono', ui-monospace, monospace; text-transform: uppercase">
+<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 10px; letter-spacing: 0.12em; color: #6B675D">Passenger</dt><dd style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 900; font-stretch: 112%; font-size: 22px; line-height: 1">Shivrajsinh Zala</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 10px; letter-spacing: 0.12em; color: #6B675D">From</dt><dd style="margin: 0; font-size: 15px; font-weight: 600">Figma</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 10px; letter-spacing: 0.12em; color: #6B675D">To</dt><dd style="margin: 0; font-size: 15px; font-weight: 600">Production</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 10px; letter-spacing: 0.12em; color: #6B675D">Class</dt><dd style="margin: 0; font-size: 15px; font-weight: 600">Frontend</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 10px; letter-spacing: 0.12em; color: #6B675D">Since</dt><dd style="margin: 0; font-size: 15px; font-weight: 600">Feb 2025</dd></div>
+</dl>
+</div>
+<div style="position: relative; border-top: 3px dashed #121212; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px">
+<span aria-hidden="true" style="position: absolute; left: -17px; top: -16px; width: 26px; height: 26px; border-radius: 50%; background: #F3F0E6; border: 3px solid #121212"></span>
+<span aria-hidden="true" style="position: absolute; right: -17px; top: -16px; width: 26px; height: 26px; border-radius: 50%; background: #F3F0E6; border: 3px solid #121212"></span>
+<span aria-hidden="true" style="flex: 1; height: 44px; max-width: 260px; background: repeating-linear-gradient(90deg, #121212 0 3px, transparent 3px 5px, #121212 5px 6px, transparent 6px 10px, #121212 10px 14px, transparent 14px 16px)"></span>
+<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.08em">SZ-RJT-2025</span>
+</div>
+</div>
+<span data-stamp style="position: absolute; right: -14px; bottom: 92px; transform: rotate(-14deg); border: 4px solid #2E4BFF; color: #2E4BFF; background: rgba(243, 240, 230, 0.86); padding: 8px 14px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: 14px; line-height: 1.25; letter-spacing: 0.08em; text-transform: uppercase; text-align: center">★ Rising Star ★<br>JDG · 2025</span>
+</div>
+</div>
+</section>
+
+<!-- ===== TICKER ===== -->
+<div data-skew aria-hidden="true" style="transform: rotate(-1.6deg); margin: 0 -40px; position: relative; z-index: 2">
+<div style="background: #121212; border-top: 3px solid #121212; border-bottom: 3px solid #121212; overflow: hidden">
+<div data-marquee style="display: flex; width: max-content; white-space: nowrap; padding: 16px 0; color: var(--accent); font-weight: 900; font-stretch: 125%; font-size: clamp(20px, 2.4vw, 34px); text-transform: uppercase">
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px"><span>WordPress</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>Squarespace</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>Webflow</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>Shopify</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>React</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>Next.js</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>Astro</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>GSAP</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span></div>
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px"><span>WordPress</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>Squarespace</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>Webflow</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>Shopify</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>React</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>Next.js</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>Astro</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span><span>GSAP</span><span style="width: 14px; height: 14px; background: var(--accent); flex: none"></span></div>
+</div>
+</div>
+<div style="background: var(--accent); border-bottom: 3px solid #121212; overflow: hidden">
+<div data-marquee style="display: flex; width: max-content; white-space: nowrap; padding: 10px 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: clamp(12px, 1.05vw, 15px); text-transform: uppercase; letter-spacing: 0.12em">
+<div style="display: flex; gap: 36px; padding-right: 36px"><span>Next stop: your website</span><span>/</span><span>30+ sites shipped</span><span>/</span><span>Figma → code</span><span>/</span><span>Morbi ⇄ Rajkot</span><span>/</span><span>Next stop: your website</span><span>/</span><span>30+ sites shipped</span><span>/</span><span>Figma → code</span><span>/</span><span>Morbi ⇄ Rajkot</span><span>/</span></div>
+<div style="display: flex; gap: 36px; padding-right: 36px"><span>Next stop: your website</span><span>/</span><span>30+ sites shipped</span><span>/</span><span>Figma → code</span><span>/</span><span>Morbi ⇄ Rajkot</span><span>/</span><span>Next stop: your website</span><span>/</span><span>30+ sites shipped</span><span>/</span><span>Figma → code</span><span>/</span><span>Morbi ⇄ Rajkot</span><span>/</span></div>
+</div>
+</div>
+</div>
+
+<!-- ===== WORK: sticky grid zoom (pinned in live view) ===== -->
+<section id="work" data-gz style="position: relative; overflow: hidden; padding: clamp(72px, 9vw, 120px) 0">
+<div data-gz-stage style="position: relative; min-height: var(--gz-min); display: flex; align-items: center; justify-content: center; padding: 0 16px">
+<ul data-gz-grid style="list-style: none; margin: 0; padding: 0; width: min(760px, 90vw); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 2.2vw, 30px)">
+
+<li data-gz-item style="aspect-ratio: 3 / 2; border: 3px solid #121212; box-shadow: var(--sh-sm); overflow: hidden; background: #EDE9DC"><img src="project-st-tracker.webp" alt="ST Tracker project screens" style="width: 100%; height: 100%; object-fit: cover; display: block"></li>
+
+<li data-gz-item style="aspect-ratio: 3 / 2; border: 3px solid #121212; box-shadow: var(--sh-sm); overflow: hidden; background: #EDE9DC"><img src="project-loanflow.webp" alt="LoanFlow project screens" style="width: 100%; height: 100%; object-fit: cover; display: block"></li>
+
+<li data-gz-item style="aspect-ratio: 3 / 2; border: 3px solid #121212; box-shadow: var(--sh-sm); overflow: hidden; background: #EDE9DC"><img src="project-craft-design-studio.webp" alt="Craft Design Studio project screens" style="width: 100%; height: 100%; object-fit: cover; display: block"></li>
+
+<li data-gz-item style="aspect-ratio: 3 / 2; border: 3px solid #121212; box-shadow: var(--sh-sm); overflow: hidden; background: #EDE9DC"><img src="project-solar-quartz.webp" alt="Solar Quartz project screens" style="width: 100%; height: 100%; object-fit: cover; display: block"></li>
+
+<li data-gz-item style="aspect-ratio: 3 / 2; border: 3px solid #121212; box-shadow: var(--sh-sm); overflow: hidden; background: #EDE9DC"><img src="project-website-builder.webp" alt="WebCraft Builder project screens" style="width: 100%; height: 100%; object-fit: cover; display: block"></li>
+
+<li data-gz-item style="aspect-ratio: 3 / 2; border: 3px solid #121212; box-shadow: var(--sh-sm); overflow: hidden; background: #EDE9DC"><img src="project-venus-pumps.webp" alt="Venus Pumps &amp; Motors project screens" style="width: 100%; height: 100%; object-fit: cover; display: block"></li>
+
+<li data-gz-item style="aspect-ratio: 3 / 2; border: 3px solid #121212; box-shadow: var(--sh-sm); overflow: hidden; background: #EDE9DC"><img src="project-gardi-chat.webp" alt="Gardi Chat App project screens" style="width: 100%; height: 100%; object-fit: cover; display: block"></li>
+
+<li data-gz-item style="aspect-ratio: 3 / 2; border: 3px solid #121212; box-shadow: var(--sh-sm); overflow: hidden; background: #EDE9DC"><img src="project-sahil-enterprise.webp" alt="Sahil Enterprise project screens" style="width: 100%; height: 100%; object-fit: cover; display: block"></li>
+
+<li data-gz-item style="aspect-ratio: 3 / 2; border: 3px solid #121212; box-shadow: var(--sh-sm); overflow: hidden; background: #EDE9DC"><img src="project-somnath.webp" alt="Somnath Khata project screens" style="width: 100%; height: 100%; object-fit: cover; display: block"></li>
+
+<li data-gz-item style="aspect-ratio: 3 / 2; border: 3px solid #121212; box-shadow: var(--sh-sm); overflow: hidden; background: #EDE9DC"><img src="project-shivam-ro.webp" alt="Shivam RO Water Solution project screens" style="width: 100%; height: 100%; object-fit: cover; display: block"></li>
+
+<li data-gz-item style="aspect-ratio: 3 / 2; border: 3px solid #121212; box-shadow: var(--sh-sm); overflow: hidden; background: #EDE9DC"><img src="project-price-compare.webp" alt="AI Price Comparator project screens" style="width: 100%; height: 100%; object-fit: cover; display: block"></li>
+
+<li data-gz-item style="aspect-ratio: 3 / 2; border: 3px solid #121212; box-shadow: var(--sh-sm); overflow: hidden; background: #EDE9DC"><img src="project-quotegen.webp" alt="Quote Generator project screens" style="width: 100%; height: 100%; object-fit: cover; display: block"></li>
+
+</ul>
+<div data-gz-title style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; width: max-content; max-width: calc(100% - 32px); box-sizing: border-box; background: #121212; color: #F3F0E6; border: 3px solid #121212; box-shadow: var(--sh-accent-lg); padding: clamp(20px, 3vw, 40px) clamp(22px, 3.6vw, 52px); display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center">
+<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #A9A59A">Stop 02 — The work</span>
+<h2 style="margin: 0; font-weight: 900; font-stretch: 112%; font-size: clamp(34px, 6vw, 92px); line-height: 0.9; letter-spacing: -0.02em; text-transform: uppercase">30+ sites shipped.<br><span style="color: var(--accent)">13 on this page.</span></h2>
+<a href="#featured" data-magnetic style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; background: var(--accent); color: #121212; border: 3px solid #F3F0E6; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; font-weight: 600; text-transform: uppercase; text-decoration: none">Board the work ↓</a>
+</div>
+</div>
+</section>
+
+<!-- ===== FEATURED: boarding passes, horizontal scroll in live view ===== -->
+<section id="featured" data-hz style="overflow: hidden; padding: clamp(32px, 4vw, 56px) 0 clamp(72px, 9vw, 120px)">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px">
+<h2 style="margin: 0; font-weight: 900; font-stretch: 112%; font-size: clamp(44px, 6.4vw, 96px); line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em">
+<span style="display: block; overflow: hidden"><span data-reveal style="display: block">Featured</span></span>
+<span style="display: block; overflow: hidden"><span data-reveal style="display: block">routes</span></span>
+</h2>
+<p data-fade style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; line-height: 1.6; max-width: 34ch">Products I designed, built and shipped myself. Client work is under NDA — the client sites I can show are in the index below.</p>
+</div>
+<div data-hz-track style="display: flex; flex-direction: var(--hz-dir); gap: clamp(24px, 3.4vw, 48px); width: var(--hz-w); padding: 48px clamp(16px, 4vw, 48px) 16px; box-sizing: border-box">
+
+<article style="flex: none; width: var(--ticket-w); display: flex; flex-wrap: wrap; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh)">
+<div data-hz-frame data-cursor-view data-cursor-text="Open ↗" style="flex: 1 1 480px; min-height: clamp(260px, 30vw, 440px); position: relative; overflow: hidden; background: #2E4BFF; border-right: 3px solid #121212; border-bottom: 3px solid #121212; margin: 0 -3px -3px 0">
+<img data-hz-img src="project-st-tracker.webp" alt="ST Tracker — live GSRTC bus tracking PWA on a phone" style="position: absolute; top: 0; left: -8%; width: 116%; height: 100%; object-fit: cover; display: block">
+</div>
+<div style="flex: 1 1 340px; position: relative; padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; justify-content: space-between; gap: 24px">
+<div class="only-wide"><span aria-hidden="true" style="position: absolute; left: -17px; top: -17px; width: 28px; height: 28px; border-radius: 50%; background: #F3F0E6; border: 3px solid #121212"></span><span aria-hidden="true" style="position: absolute; left: -17px; bottom: -17px; width: 28px; height: 28px; border-radius: 50%; background: #F3F0E6; border: 3px solid #121212"></span></div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; text-transform: uppercase"><span>Route 01 · PWA</span><span style="background: var(--accent); border: 2px solid #121212; padding: 2px 8px">Live</span></div>
+<h3 style="margin: 0; font-weight: 900; font-stretch: 112%; font-size: clamp(38px, 4.4vw, 64px); line-height: 0.92; text-transform: uppercase">ST Tracker</h3>
+<div style="display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 16px; line-height: 1.45">
+<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; padding-top: 3px; color: #6B675D">FROM</span><span>Standing at the depot, guessing when the bus will come.</span>
+<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; padding-top: 3px; color: #6B675D">TO</span><span style="font-weight: 700">Live GSRTC positions, stop ETAs and push alerts on your phone.</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px"><span style="border: 2px solid #121212; padding: 4px 10px">Node.js</span><span style="border: 2px solid #121212; padding: 4px 10px">SQLite</span><span style="border: 2px solid #121212; padding: 4px 10px">Web Push</span></div>
+<a href="https://tracker.shivrajsinh.in" data-magnetic style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; background: #121212; color: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-accent); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; font-weight: 600; text-transform: uppercase; text-decoration: none">Board the app ↗</a>
+</div>
+</div>
+</article>
+
+<article style="flex: none; width: var(--ticket-w); display: flex; flex-wrap: wrap; background: var(--accent); border: 3px solid #121212; box-shadow: var(--sh)">
+<div data-hz-frame data-cursor-view data-cursor-text="View ↗" style="flex: 1 1 480px; min-height: clamp(260px, 30vw, 440px); position: relative; overflow: hidden; background: #121212; border-right: 3px solid #121212; border-bottom: 3px solid #121212; margin: 0 -3px -3px 0">
+<img data-hz-img src="project-loanflow.webp" alt="LoanFlow — loan management dashboard screens" style="position: absolute; top: 0; left: -8%; width: 116%; height: 100%; object-fit: cover; display: block">
+</div>
+<div style="flex: 1 1 340px; position: relative; padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; justify-content: space-between; gap: 24px">
+<div class="only-wide"><span aria-hidden="true" style="position: absolute; left: -17px; top: -17px; width: 28px; height: 28px; border-radius: 50%; background: #F3F0E6; border: 3px solid #121212"></span><span aria-hidden="true" style="position: absolute; left: -17px; bottom: -17px; width: 28px; height: 28px; border-radius: 50%; background: #F3F0E6; border: 3px solid #121212"></span></div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; text-transform: uppercase"><span>Route 02 · Web app</span><span style="background: #FFFFFF; border: 2px solid #121212; padding: 2px 8px">In use</span></div>
+<h3 style="margin: 0; font-weight: 900; font-stretch: 112%; font-size: clamp(38px, 4.4vw, 64px); line-height: 0.92; text-transform: uppercase">LoanFlow</h3>
+<div style="display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 16px; line-height: 1.45">
+<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; padding-top: 3px">FROM</span><span>Paper ledgers and EMIs tracked from memory.</span>
+<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; padding-top: 3px">TO</span><span style="font-weight: 700">Every account, EMI and payment for a working financier in one dashboard.</span>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px"><span style="border: 2px solid #121212; padding: 4px 10px">Next.js</span><span style="border: 2px solid #121212; padding: 4px 10px">Prisma</span><span style="border: 2px solid #121212; padding: 4px 10px">Razorpay</span></div>
+</div>
+</article>
+
+<article style="flex: none; width: var(--ticket-w); display: flex; flex-wrap: wrap; background: #121212; color: #F3F0E6; border: 3px solid #121212; box-shadow: var(--sh-accent)">
+<div data-hz-frame data-cursor-view data-cursor-text="Try ↗" style="flex: 1 1 480px; min-height: clamp(260px, 30vw, 440px); position: relative; overflow: hidden; background: var(--accent); border-right: 3px solid #F3F0E6; border-bottom: 3px solid #F3F0E6; margin: 0 -3px -3px 0">
+<img data-hz-img src="project-website-builder.webp" alt="WebCraft Builder — visual website builder editor screens" style="position: absolute; top: 0; left: -8%; width: 116%; height: 100%; object-fit: cover; display: block">
+</div>
+<div style="flex: 1 1 340px; position: relative; padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; justify-content: space-between; gap: 24px">
+<div class="only-wide"><span aria-hidden="true" style="position: absolute; left: -17px; top: -17px; width: 28px; height: 28px; border-radius: 50%; background: #F3F0E6; border: 3px solid #121212"></span><span aria-hidden="true" style="position: absolute; left: -17px; bottom: -17px; width: 28px; height: 28px; border-radius: 50%; background: #F3F0E6; border: 3px solid #121212"></span></div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; text-transform: uppercase"><span>Route 03 · Full-stack</span><span style="background: var(--accent); color: #121212; border: 2px solid var(--accent); padding: 2px 8px">Live</span></div>
+<h3 style="margin: 0; font-weight: 900; font-stretch: 112%; font-size: clamp(38px, 4.4vw, 64px); line-height: 0.92; text-transform: uppercase; color: var(--accent)">WebCraft</h3>
+<div style="display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 16px; line-height: 1.45">
+<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; padding-top: 3px; color: #A9A59A">FROM</span><span>A blank page and a deadline.</span>
+<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; padding-top: 3px; color: #A9A59A">TO</span><span style="font-weight: 700">Drag sections in, style them, publish — editor and backend all mine.</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px"><span style="border: 2px solid #F3F0E6; padding: 4px 10px">React</span><span style="border: 2px solid #F3F0E6; padding: 4px 10px">Vite</span><span style="border: 2px solid #F3F0E6; padding: 4px 10px">Node.js</span></div>
+<a href="https://builder.deepfashion.in" data-magnetic style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; background: var(--accent); color: #121212; border: 3px solid #F3F0E6; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; font-weight: 600; text-transform: uppercase; text-decoration: none">Try the builder ↗</a>
+</div>
+</div>
+</article>
+
+</div>
+</section>
+
+<!-- ===== INDEX: dual-wave list (wide) / simple list (narrow) ===== -->
+<section id="index" style="background: #121212; color: #F3F0E6; border-top: 3px solid #121212; border-bottom: 3px solid #121212; padding: clamp(72px, 9vw, 136px) 0">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px) 56px; display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px">
+<h2 style="margin: 0; font-weight: 900; font-stretch: 112%; font-size: clamp(44px, 6.4vw, 96px); line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em; color: var(--accent)">
+<span style="display: block; overflow: hidden"><span data-reveal style="display: block">Every</span></span>
+<span style="display: block; overflow: hidden"><span data-reveal style="display: block">stop</span></span>
+</h2>
+<p data-fade style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; line-height: 1.6; max-width: 34ch; color: #CFCBBF">13 projects — client sites, products and experiments. Scroll and they sway.</p>
+</div>
+
+<div class="only-wide">
+<div data-wave style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); display: flex; gap: 32px; align-items: flex-start">
+<div data-wave-left style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+
+<a data-wl href="https://tracker.shivrajsinh.in" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: var(--accent); text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">01</span>ST Tracker</a>
+
+<a data-wl href="#" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: #F3F0E6; text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">02</span>LoanFlow</a>
+
+<a data-wl href="https://builder.deepfashion.in" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: #F3F0E6; text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">03</span>WebCraft Builder</a>
+
+<a data-wl href="#" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: #F3F0E6; text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">04</span>Venus Pumps &amp; Motors</a>
+
+<a data-wl href="#" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: #F3F0E6; text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">05</span>Solar Quartz</a>
+
+<a data-wl href="#" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: #F3F0E6; text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">06</span>Craft Design Studio</a>
+
+<a data-wl href="#" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: #F3F0E6; text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">07</span>Shivam RO</a>
+
+<a data-wl href="#" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: #F3F0E6; text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">08</span>Sahil Enterprise</a>
+
+<a data-wl href="#" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: #F3F0E6; text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">09</span>Gardi Chat App</a>
+
+<a data-wl href="#" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: #F3F0E6; text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">10</span>Quote Generator</a>
+
+<a data-wl href="#" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: #F3F0E6; text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">11</span>Somnath Khata</a>
+
+<a data-wl href="#" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: #F3F0E6; text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">12</span>AI Price Comparator</a>
+
+<a data-wl href="#" style="align-self: flex-start; min-height: 52px; display: inline-flex; align-items: center; gap: 14px; color: #F3F0E6; text-decoration: none; white-space: nowrap; font-weight: 800; font-stretch: 88%; font-size: clamp(22px, 2.4vw, 34px); text-transform: uppercase; line-height: 1"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; color: #6B675D">13</span>ToDesktop Clone</a>
+
+</div>
+<div style="flex: 0 0 clamp(260px, 27vw, 380px); align-self: stretch">
+<div data-wave-img data-cursor-view data-cursor-text="Peek" style="position: sticky; top: 140px; aspect-ratio: 3 / 2; border: 3px solid var(--accent); box-shadow: 10px 10px 0 var(--accent); overflow: hidden; background: #1E1E1C">
+
+<img data-wimg src="project-st-tracker.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 1">
+
+<img data-wimg src="project-loanflow.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0">
+
+<img data-wimg src="project-website-builder.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0">
+
+<img data-wimg src="project-venus-pumps.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0">
+
+<img data-wimg src="project-solar-quartz.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0">
+
+<img data-wimg src="project-craft-design-studio.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0">
+
+<img data-wimg src="project-shivam-ro.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0">
+
+<img data-wimg src="project-sahil-enterprise.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0">
+
+<img data-wimg src="project-gardi-chat.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0">
+
+<img data-wimg src="project-quotegen.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0">
+
+<img data-wimg src="project-somnath.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0">
+
+<img data-wimg src="project-price-compare.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0">
+
+<img data-wimg src="project-todesktop.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0">
+
+</div>
+</div>
+<div data-wave-right style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">PWA · Node.js · Web Push</span>
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">Web app · Next.js · Prisma</span>
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">Full-stack · React · Node.js</span>
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">Client · WordPress</span>
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">Client · Shopify · Amazon</span>
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">Client · Astro · GSAP</span>
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">Client · Next.js · Cloudflare D1</span>
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">Client · Astro · GSAP</span>
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">Real-time · Firebase</span>
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">Business tool · React</span>
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">Dairy ledger · React</span>
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">Chrome extension · Gemini</span>
+
+<span data-wr style="align-self: flex-end; min-height: 52px; display: inline-flex; align-items: center; white-space: nowrap; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #A9A59A">UI study · React</span>
+
+</div>
+</div>
+</div>
+
+<div class="only-narrow">
+<div style="padding: 0 16px; display: flex; flex-direction: column">
+
+<a href="https://tracker.shivrajsinh.in" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-st-tracker.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">ST Tracker</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">PWA · Node.js · Web Push</span></span>
+</a>
+
+<a href="#" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-loanflow.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">LoanFlow</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">Web app · Next.js · Prisma</span></span>
+</a>
+
+<a href="https://builder.deepfashion.in" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-website-builder.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">WebCraft Builder</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">Full-stack · React · Node.js</span></span>
+</a>
+
+<a href="#" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-venus-pumps.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">Venus Pumps &amp; Motors</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">Client · WordPress</span></span>
+</a>
+
+<a href="#" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-solar-quartz.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">Solar Quartz</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">Client · Shopify · Amazon</span></span>
+</a>
+
+<a href="#" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-craft-design-studio.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">Craft Design Studio</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">Client · Astro · GSAP</span></span>
+</a>
+
+<a href="#" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-shivam-ro.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">Shivam RO</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">Client · Next.js · Cloudflare D1</span></span>
+</a>
+
+<a href="#" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-sahil-enterprise.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">Sahil Enterprise</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">Client · Astro · GSAP</span></span>
+</a>
+
+<a href="#" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-gardi-chat.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">Gardi Chat App</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">Real-time · Firebase</span></span>
+</a>
+
+<a href="#" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-quotegen.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">Quote Generator</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">Business tool · React</span></span>
+</a>
+
+<a href="#" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-somnath.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">Somnath Khata</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">Dairy ledger · React</span></span>
+</a>
+
+<a href="#" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-price-compare.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">AI Price Comparator</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">Chrome extension · Gemini</span></span>
+</a>
+
+<a href="#" style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #333; color: #F3F0E6; text-decoration: none">
+<span style="flex: 0 0 92px; height: 62px; border: 2px solid var(--accent); overflow: hidden"><img src="project-todesktop.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-weight: 800; font-stretch: 88%; font-size: 21px; text-transform: uppercase; line-height: 1.05">ToDesktop Clone</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; color: #A9A59A">UI study · React</span></span>
+</a>
+
+</div>
+</div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" style="max-width: 1280px; margin: 0 auto; padding: clamp(80px, 10vw, 152px) clamp(16px, 4vw, 48px) clamp(72px, 9vw, 128px); display: flex; flex-direction: column; gap: 48px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px; align-items: end">
+<h2 style="margin: 0; font-weight: 900; font-stretch: 112%; font-size: clamp(44px, 6.4vw, 96px); line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em">
+<span style="display: block; overflow: hidden"><span data-reveal style="display: block">Who’s</span></span>
+<span style="display: block; overflow: hidden"><span data-reveal style="display: block">driving</span></span>
+</h2>
+<p data-fade style="margin: 0; font-size: clamp(19px, 1.6vw, 23px); line-height: 1.5; text-wrap: pretty">I’m Shivrajsinh. By day I build and look after client sites at Just Digital Gurus. Between stops, I build my own products — ST Tracker started because I was tired of guessing when my bus would show up.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px; align-items: start">
+<div data-fade style="background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh)">
+<div style="display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; padding: 14px clamp(20px, 2.4vw, 32px); border-bottom: 3px solid #121212; background: var(--accent); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; text-transform: uppercase"><span>Driver’s log</span><span>Feb 2025 — Now</span></div>
+<div style="padding: clamp(22px, 2.6vw, 36px); display: flex; flex-direction: column; gap: 18px">
+<div><h3 style="margin: 0; font-weight: 900; font-stretch: 112%; font-size: clamp(26px, 2.4vw, 34px); text-transform: uppercase; line-height: 1">Frontend Developer</h3><p style="margin: 6px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px">Just Digital Gurus · Rajkot</p></div>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; font-size: 17px; line-height: 1.5">
+<li style="display: grid; grid-template-columns: 44px 1fr; gap: 8px; padding: 12px 0; border-top: 2px solid #121212"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; padding-top: 3px">01</span>Build and maintain client sites end to end, Figma to launch.</li>
+<li style="display: grid; grid-template-columns: 44px 1fr; gap: 8px; padding: 12px 0; border-top: 2px solid #121212"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; padding-top: 3px">02</span>WordPress themes, plugins, custom post types and WooCommerce.</li>
+<li style="display: grid; grid-template-columns: 44px 1fr; gap: 8px; padding: 12px 0; border-top: 2px solid #121212"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; padding-top: 3px">03</span>Squarespace and Webflow builds with custom CSS and interactions.</li>
+<li style="display: grid; grid-template-columns: 44px 1fr; gap: 8px; padding: 12px 0; border-top: 2px solid #121212"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; padding-top: 3px">04</span>GSAP motion and AI-assisted workflows to ship faster.</li>
+</ol>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em">Luggage — platforms</span>
+<div data-chips style="display: flex; flex-wrap: wrap; gap: 10px">
+<span data-magnetic style="display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; padding: 10px 16px 10px 12px; background: var(--accent); border: 3px solid #121212; box-shadow: var(--sh-sm)"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid #121212; background: #F3F0E6"></span>WordPress</span>
+<span data-magnetic style="display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; padding: 10px 16px 10px 12px; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm)"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid #121212; background: #F3F0E6"></span>Squarespace</span>
+<span data-magnetic style="display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; padding: 10px 16px 10px 12px; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm)"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid #121212; background: #F3F0E6"></span>Webflow</span>
+<span data-magnetic style="display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; padding: 10px 16px 10px 12px; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm)"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid #121212; background: #F3F0E6"></span>Shopify</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em">Luggage — code &amp; motion</span>
+<div data-chips style="display: flex; flex-wrap: wrap; gap: 10px">
+<span data-magnetic style="display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; padding: 10px 16px 10px 12px; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm)"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid #121212; background: #F3F0E6"></span>React</span>
+<span data-magnetic style="display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; padding: 10px 16px 10px 12px; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm)"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid #121212; background: #F3F0E6"></span>Next.js</span>
+<span data-magnetic style="display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; padding: 10px 16px 10px 12px; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm)"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid #121212; background: #F3F0E6"></span>Astro</span>
+<span data-magnetic style="display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; padding: 10px 16px 10px 12px; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm)"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid #121212; background: #F3F0E6"></span>Node.js</span>
+<span data-magnetic style="display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; padding: 10px 16px 10px 12px; background: #2E4BFF; color: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm)"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid #121212; background: #F3F0E6"></span>GSAP</span>
+<span data-magnetic style="display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; padding: 10px 16px 10px 12px; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm)"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid #121212; background: #F3F0E6"></span>Tailwind</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 16px">
+<div data-fade style="background: #121212; color: #F3F0E6; border: 3px solid #121212; box-shadow: var(--sh-accent); padding: 22px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent)">Award · 2025</span><span style="font-weight: 900; font-stretch: 112%; font-size: 24px; text-transform: uppercase; line-height: 1">Rising Star</span><span style="font-size: 15px; line-height: 1.45; color: #CFCBBF">Just Digital Gurus</span></div>
+<div data-fade style="background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh); padding: 22px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em">2023 — 2025</span><span style="font-weight: 900; font-stretch: 112%; font-size: 24px; text-transform: uppercase; line-height: 1">MCA</span><span style="font-size: 15px; line-height: 1.45; color: #4A4740">B H Gardi College, Rajkot (GTU)</span></div>
+<div data-fade style="background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh); padding: 22px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em">2020 — 2023</span><span style="font-weight: 900; font-stretch: 112%; font-size: 24px; text-transform: uppercase; line-height: 1">BCA</span><span style="font-size: 15px; line-height: 1.45; color: #4A4740">OMVVIM College, Morbi</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== OFF THE SCREEN: venetian-blind photo transitions (pinned in live view) ===== -->
+<section id="life" data-blinds aria-label="Off the screen" style="position: relative; height: var(--blinds-h); overflow: hidden; background: #121212; border-top: 3px solid #121212; border-bottom: 3px solid #121212">
+
+<div data-blind-layer style="position: absolute; inset: 0">
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 0%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-webflow-designer-10.webp" alt="" style="position: absolute; left: 0; top: 0%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 60%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 12.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-webflow-designer-10.webp" alt="" style="position: absolute; left: 0; top: -99.2%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 60%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 25%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-webflow-designer-10.webp" alt="" style="position: absolute; left: 0; top: -198.4%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 60%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 37.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-webflow-designer-10.webp" alt="" style="position: absolute; left: 0; top: -297.6%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 60%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 50%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-webflow-designer-10.webp" alt="" style="position: absolute; left: 0; top: -396.8%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 60%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 62.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-webflow-designer-10.webp" alt="" style="position: absolute; left: 0; top: -496%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 60%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 75%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-webflow-designer-10.webp" alt="" style="position: absolute; left: 0; top: -595.2%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 60%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 87.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-webflow-designer-10.webp" alt="" style="position: absolute; left: 0; top: -694.4%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 60%; display: block"></div>
+
+</div>
+
+<div data-blind-layer style="position: absolute; inset: 0">
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 0%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-gsap-animation-developer-9.webp" alt="" style="position: absolute; left: 0; top: 0%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 75%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 12.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-gsap-animation-developer-9.webp" alt="" style="position: absolute; left: 0; top: -99.2%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 75%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 25%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-gsap-animation-developer-9.webp" alt="" style="position: absolute; left: 0; top: -198.4%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 75%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 37.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-gsap-animation-developer-9.webp" alt="" style="position: absolute; left: 0; top: -297.6%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 75%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 50%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-gsap-animation-developer-9.webp" alt="" style="position: absolute; left: 0; top: -396.8%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 75%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 62.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-gsap-animation-developer-9.webp" alt="" style="position: absolute; left: 0; top: -496%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 75%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 75%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-gsap-animation-developer-9.webp" alt="" style="position: absolute; left: 0; top: -595.2%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 75%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 87.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-gsap-animation-developer-9.webp" alt="" style="position: absolute; left: 0; top: -694.4%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 75%; display: block"></div>
+
+</div>
+
+<div data-blind-layer style="position: absolute; inset: 0">
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 0%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-wordpress-expert-4.webp" alt="" style="position: absolute; left: 0; top: 0%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 70%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 12.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-wordpress-expert-4.webp" alt="" style="position: absolute; left: 0; top: -99.2%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 70%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 25%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-wordpress-expert-4.webp" alt="" style="position: absolute; left: 0; top: -198.4%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 70%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 37.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-wordpress-expert-4.webp" alt="" style="position: absolute; left: 0; top: -297.6%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 70%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 50%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-wordpress-expert-4.webp" alt="" style="position: absolute; left: 0; top: -396.8%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 70%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 62.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-wordpress-expert-4.webp" alt="" style="position: absolute; left: 0; top: -496%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 70%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 75%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-wordpress-expert-4.webp" alt="" style="position: absolute; left: 0; top: -595.2%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 70%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 87.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-wordpress-expert-4.webp" alt="" style="position: absolute; left: 0; top: -694.4%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 70%; display: block"></div>
+
+</div>
+
+<div data-blind-layer style="position: absolute; inset: 0">
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 0%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-frontend-developer-1.webp" alt="" style="position: absolute; left: 0; top: 0%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 22%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 12.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-frontend-developer-1.webp" alt="" style="position: absolute; left: 0; top: -99.2%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 22%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 25%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-frontend-developer-1.webp" alt="" style="position: absolute; left: 0; top: -198.4%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 22%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 37.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-frontend-developer-1.webp" alt="" style="position: absolute; left: 0; top: -297.6%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 22%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 50%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-frontend-developer-1.webp" alt="" style="position: absolute; left: 0; top: -396.8%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 22%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 62.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-frontend-developer-1.webp" alt="" style="position: absolute; left: 0; top: -496%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 22%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 75%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-frontend-developer-1.webp" alt="" style="position: absolute; left: 0; top: -595.2%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 22%; display: block"></div>
+
+<div data-strip style="position: absolute; left: 0; right: 0; top: 87.5%; height: 12.6%; overflow: hidden; transform-origin: 50% 50%"><img src="gallery-frontend-developer-1.webp" alt="" style="position: absolute; left: 0; top: -694.4%; width: 100%; height: 793.65%; object-fit: cover; object-position: 50% 22%; display: block"></div>
+
+</div>
+
+<div style="position: absolute; left: clamp(16px, 4vw, 48px); bottom: clamp(16px, 4vw, 48px); right: clamp(16px, 4vw, 48px); display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; pointer-events: none">
+<h2 style="margin: 0; background: #121212; color: #F3F0E6; border: 3px solid #121212; box-shadow: var(--sh-accent); padding: 14px 22px 10px; font-weight: 900; font-stretch: 112%; font-size: clamp(36px, 6vw, 92px); line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em">Off the<br><span style="color: var(--accent)">screen</span></h2>
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; text-transform: uppercase">
+<span style="background: var(--accent); border: 3px solid #121212; padding: 6px 12px; font-size: clamp(16px, 1.6vw, 22px)"><span data-blind-count>04</span> / 04</span>
+<span style="background: #121212; color: #F3F0E6; padding: 4px 10px; font-size: 12px; letter-spacing: 0.08em">Stop 05 — the person behind the commits</span>
+</div>
+</div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" style="background: var(--accent); border-bottom: 3px solid #121212; overflow: hidden">
+<div style="overflow: hidden; border-bottom: 3px solid #121212; padding: clamp(20px, 3vw, 36px) 0">
+<div data-marquee aria-hidden="true" style="display: flex; width: max-content; white-space: nowrap; font-weight: 900; font-stretch: 125%; font-size: clamp(56px, 11vw, 168px); line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em">
+<div style="display: flex; align-items: center; gap: 0.3em; padding-right: 0.3em"><span>Next stop</span><span style="color: #F3F0E6; -webkit-text-stroke: 3px #121212">→</span><span style="color: transparent; -webkit-text-stroke: 3px #121212">your project</span><span style="width: 0.5em; height: 0.5em; background: #121212; flex: none"></span></div>
+<div style="display: flex; align-items: center; gap: 0.3em; padding-right: 0.3em"><span>Next stop</span><span style="color: #F3F0E6; -webkit-text-stroke: 3px #121212">→</span><span style="color: transparent; -webkit-text-stroke: 3px #121212">your project</span><span style="width: 0.5em; height: 0.5em; background: #121212; flex: none"></span></div>
+</div>
+</div>
+<div style="max-width: 1280px; margin: 0 auto; padding: clamp(48px, 6vw, 96px) clamp(16px, 4vw, 48px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: clamp(36px, 5vw, 72px); align-items: start">
+<div style="display: flex; flex-direction: column; gap: 26px">
+<h2 style="margin: 0; font-weight: 900; font-stretch: 112%; font-size: clamp(40px, 4.8vw, 72px); line-height: 0.92; text-transform: uppercase; letter-spacing: -0.02em">
+<span style="display: block; overflow: hidden"><span data-reveal style="display: block">Got a site</span></span>
+<span style="display: block; overflow: hidden"><span data-reveal style="display: block">to build?</span></span>
+</h2>
+<p data-fade style="margin: 0; font-size: 19px; line-height: 1.5; max-width: 36ch">Tell me where you’re headed. I reply within a day — usually from the bus.</p>
+<a href="mailto:[your@email]" style="align-self: flex-start; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: clamp(16px, 1.6vw, 22px); font-weight: 600; color: #121212; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px">[your@email] ↗</a>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 460px">
+<a href="[telegram-url]" data-magnetic style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; padding: 0 16px; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm); color: #121212; text-decoration: none; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: 14px; text-transform: uppercase">Telegram <span aria-hidden="true">↗</span></a>
+<a href="[github-url]" data-magnetic style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; padding: 0 16px; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm); color: #121212; text-decoration: none; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: 14px; text-transform: uppercase">GitHub <span aria-hidden="true">↗</span></a>
+<a href="[linkedin-url]" data-magnetic style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; padding: 0 16px; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm); color: #121212; text-decoration: none; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: 14px; text-transform: uppercase">LinkedIn <span aria-hidden="true">↗</span></a>
+<a href="[instagram-url]" data-magnetic style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; padding: 0 16px; background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-sm); color: #121212; text-decoration: none; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: 14px; text-transform: uppercase">Instagram <span aria-hidden="true">↗</span></a>
+</div>
+</div>
+<form data-fade style="background: #FFFFFF; border: 3px solid #121212; box-shadow: var(--sh-lg); display: flex; flex-direction: column">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 20px; background: #121212; color: var(--accent); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase"><span>Book a seat</span><span>Ticket No. 0031</span></div>
+<div style="padding: clamp(20px, 2.6vw, 34px); display: flex; flex-direction: column; gap: 18px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px"><label for="cf-name" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; text-transform: uppercase">Passenger</label><input id="cf-name" type="text" placeholder="Your name" style="font: inherit; font-size: 17px; min-height: 52px; padding: 0 14px; border: 3px solid #121212; background: #F3F0E6; color: #121212; box-sizing: border-box; width: 100%"></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label for="cf-email" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; text-transform: uppercase">Email</label><input id="cf-email" type="email" placeholder="you@company.com" style="font: inherit; font-size: 17px; min-height: 52px; padding: 0 14px; border: 3px solid #121212; background: #F3F0E6; color: #121212; box-sizing: border-box; width: 100%"></div>
+</div>
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 10px">
+<legend style="padding: 0 0 8px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; text-transform: uppercase">Destination</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+
+<button type="button" data-dest="0" aria-pressed="true" style="min-height: 44px; padding: 0 14px; border: 3px solid #121212; background: var(--accent); color: #121212; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; text-transform: uppercase; cursor: pointer">New site</button>
+
+<button type="button" data-dest="1" aria-pressed="false" style="min-height: 44px; padding: 0 14px; border: 3px solid #121212; background: #FFFFFF; color: #121212; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; text-transform: uppercase; cursor: pointer">Redesign</button>
+
+<button type="button" data-dest="2" aria-pressed="false" style="min-height: 44px; padding: 0 14px; border: 3px solid #121212; background: #FFFFFF; color: #121212; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; text-transform: uppercase; cursor: pointer">Motion</button>
+
+<button type="button" data-dest="3" aria-pressed="false" style="min-height: 44px; padding: 0 14px; border: 3px solid #121212; background: #FFFFFF; color: #121212; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; text-transform: uppercase; cursor: pointer">Fix / care</button>
+
+</div>
+</fieldset>
+<div style="display: flex; flex-direction: column; gap: 8px"><label for="cf-msg" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; text-transform: uppercase">Notes for the driver</label><textarea id="cf-msg" rows="4" placeholder="What are you building, and by when?" style="font: inherit; font-size: 17px; padding: 12px 14px; border: 3px solid #121212; background: #F3F0E6; color: #121212; resize: vertical; box-sizing: border-box; width: 100%"></textarea></div>
+<button type="button" data-magnetic style="min-height: 56px; background: #121212; color: var(--accent); border: 3px solid #121212; box-shadow: var(--sh-blue); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer">Print my ticket →</button>
+</div>
+</form>
+</div>
+</section>
+
+<!-- ===== FOOTER: arrivals board ===== -->
+<footer data-footer style="background: #121212; color: #F3F0E6">
+<div style="max-width: 1280px; margin: 0 auto; padding: clamp(48px, 6vw, 88px) clamp(16px, 4vw, 48px) 32px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8F8B80"><span><span style="color: var(--accent)">■</span> Arrivals</span><span>Rajkot <span data-clock>--:--</span> IST</span></div>
+<div aria-hidden="true" style="display: flex; gap: clamp(3px, 0.5vw, 8px)">
+
+<span data-flip data-foot data-char="S" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(18px, 5.6vw, 80px); line-height: 1; color: var(--accent)">S</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-foot data-char="E" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(18px, 5.6vw, 80px); line-height: 1; color: var(--accent)">E</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-foot data-char="E" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(18px, 5.6vw, 80px); line-height: 1; color: var(--accent)">E</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-foot data-char=" " style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(18px, 5.6vw, 80px); line-height: 1; color: var(--accent)"> </span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-foot data-char="Y" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(18px, 5.6vw, 80px); line-height: 1; color: var(--accent)">Y</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-foot data-char="O" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(18px, 5.6vw, 80px); line-height: 1; color: var(--accent)">O</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-foot data-char="U" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(18px, 5.6vw, 80px); line-height: 1; color: var(--accent)">U</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-foot data-char=" " style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(18px, 5.6vw, 80px); line-height: 1; color: var(--accent)"> </span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-foot data-char="S" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(18px, 5.6vw, 80px); line-height: 1; color: var(--accent)">S</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-foot data-char="O" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(18px, 5.6vw, 80px); line-height: 1; color: var(--accent)">O</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-foot data-char="O" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(18px, 5.6vw, 80px); line-height: 1; color: var(--accent)">O</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+<span data-flip data-foot data-char="N" style="flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4; position: relative; display: flex; align-items: center; justify-content: center; background: #1E1E1C; border-radius: 4px; overflow: hidden; perspective: 400px"><span data-flip-ch style="display: block; font-weight: 800; font-stretch: 75%; font-size: clamp(18px, 5.6vw, 80px); line-height: 1; color: var(--accent)">N</span><span style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0B0B0A"></span></span>
+
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; border-top: 2px solid #2A2A28; padding-top: 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px">
+<span style="color: var(--accent); font-weight: 600">SZ://DEV</span>
+<span>© 2026 Shivrajsinh Zala</span>
+<a href="#top" style="color: #F3F0E6">Back to departure ↑</a>
+</div>
+</div>
+</footer>
+
+</div>
+<script src="gsap.min.js"></script>
+<script src="ScrollTrigger.min.js"></script>
+<script src="lenis.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
