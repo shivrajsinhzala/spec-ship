@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JDG Feedback — Apple Design Intelligence</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --font-apple: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+    }
+    body {
+      font-family: var(--font-apple);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Apple Glassmorphism */
+    .apple-glass {
+      background: rgba(28, 28, 30, 0.72);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .apple-glass-card {
+      background: rgba(28, 28, 30, 0.55);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .apple-glass-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(36, 36, 38, 0.7);
+      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Light Mode Overrides */
+    html.light body {
+      background-color: #f5f5f7 !important;
+      color: #1d1d1f !important;
+    }
+    html.light .apple-glass {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    html.light .apple-glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+    html.light .apple-glass-card:hover {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(0, 0, 0, 0.12);
+      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.08);
+    }
+    html.light .text-apple-heading {
+      color: #1d1d1f !important;
+    }
+    html.light .text-apple-sub {
+      color: #86868b !important;
+    }
+    html.light .bg-apple-inset {
+      background: rgba(0, 0, 0, 0.03) !important;
+      border-color: rgba(0, 0, 0, 0.06) !important;
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(140, 140, 145, 0.3);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(140, 140, 145, 0.5);
+    }
+
+    /* Apple Activity Ring Animations */
+    .ring-bg {
+      fill: none;
+      stroke-linecap: round;
+      opacity: 0.18;
+    }
+    .ring-val {
+      fill: none;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+</head>
+<body class="bg-[#000000] text-[#f5f5f7] min-h-screen selection:bg-[#0071e3] selection:text-white transition-colors duration-300">
+
+  <!-- Ambient Light Orbs -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-[20%] left-[10%] w-[500px] h-[500px] bg-gradient-to-tr from-[#0071e3]/15 to-[#af52de]/15 rounded-full blur-[120px]"></div>
+    <div class="absolute top-[40%] -right-[10%] w-[600px] h-[600px] bg-gradient-to-bl from-[#30b0c7]/10 to-[#34c759]/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <div class="relative z-10">
+
+    <!-- Apple Navigation Bar -->
+    <header class="sticky top-0 z-40 apple-glass border-b transition-colors duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        
+        <!-- Left: Logo & Title -->
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-b from-[#2c2c2e] to-[#1c1c1e] border border-white/10 flex items-center justify-center text-white shadow-inner">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 170 170">
+              <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.08-7.73-7.87-12.09-14.36-6.3-9.35-11.27-20.08-14.92-32.2-3.65-12.11-5.48-23.73-5.48-34.85 0-14.49 3.59-26.68 10.77-36.57 7.18-9.89 16.48-14.94 27.91-15.15 4.35 0 9.29 1.13 14.81 3.4 5.53 2.27 9.38 3.44 11.56 3.5 2.05-.06 5.86-1.23 11.44-3.5 5.58-2.27 10.37-3.34 14.37-3.21 10.78.43 19.64 4.33 26.58 11.71 6.94 7.38 11.29 16.63 13.06 27.75-9.43 5.69-14.07 13.59-13.91 23.72.16 8.5 3.34 15.67 9.54 21.52 6.2 5.85 13.62 9.23 22.27 10.14-2.27 7.18-5.27 14.41-8.99 21.7zM119.22 31.84c0-6.84 2.5-13.23 7.49-19.16 4.99-5.93 11.19-9.75 18.6-11.45.65 3.18.98 6.06.98 8.65 0 6.64-2.58 13.09-7.75 19.34-5.16 6.26-11.52 10.15-19.06 11.69-.13-3.04-.26-6.07-.26-9.07z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-semibold tracking-tight text-white text-apple-heading">JDG Pulse</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-white/10 text-white/70">Intelligence</span>
+            </div>
+            <p class="text-[11px] text-[#86868b] leading-tight text-apple-sub">feedback.justdigitalgurus.com &bull; 28 Responses</p>
+          </div>
+        </div>
+
+        <!-- Right: Actions & Theme Toggle -->
+        <div class="flex items-center gap-3">
+          <!-- Light/Dark Segmented Toggle -->
+          <div class="flex items-center bg-[#1c1c1e] p-0.5 rounded-full border border-white/10 text-xs text-[#86868b]">
+            <button onclick="setTheme('dark')" id="theme-dark-btn" class="px-2.5 py-1 rounded-full text-white bg-white/10 font-medium transition">
+              🌙 Dark
+            </button>
+            <button onclick="setTheme('light')" id="theme-light-btn" class="px-2.5 py-1 rounded-full hover:text-white transition">
+              ☀️ Light
+            </button>
+          </div>
+
+          <button onclick="resetFilters()" class="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[#f5f5f7] transition">
+            Reset
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+      <!-- Apple Hero Banner -->
+      <section class="space-y-2">
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white text-apple-heading">
+          Workplace Culture & Feedback.
+        </h1>
+        <p class="text-base text-[#86868b] text-apple-sub max-w-3xl leading-relaxed">
+          Comprehensive synthesis of team feedback regarding the new office relocation, workplace atmosphere, HR policies, and management support.
+        </p>
+      </section>
+
+      <!-- Apple Bento Grid Top Highlights -->
+      <section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+        <!-- Bento Card 1: Apple Activity Rings (Excitement, Positivity, Participation) -->
+        <div class="apple-glass-card rounded-3xl p-6 md:col-span-1 lg:col-span-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs font-semibold text-[#86868b] uppercase tracking-wider">
+              <span>Sentiment Rings</span>
+              <span class="text-[#0071e3] font-bold">Activity</span>
+            </div>
+            <p class="text-xs text-[#86868b] mt-1">Satisfaction & Engagement metrics</p>
+
+            <!-- 3 Concentric Apple Rings -->
+            <div class="relative w-40 h-40 mx-auto my-5 flex items-center justify-center">
+              <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
+                <!-- Ring 1: 5-Star Excitement (75%) -> r=48, C=301.6 -->
+                <circle cx="60" cy="60" r="48" stroke="#30d158" stroke-width="9" class="ring-bg"></circle>
+                <circle cx="60" cy="60" r="48" stroke="#30d158" stroke-width="9" class="ring-val"
+                  stroke-dasharray="301.6" stroke-dashoffset="75.4"></circle>
+
+                <!-- Ring 2: Named Participation (28.6%) -> r=37, C=232.5 -->
+                <circle cx="60" cy="60" r="37" stroke="#0a84ff" stroke-width="9" class="ring-bg"></circle>
+                <circle cx="60" cy="60" r="37" stroke="#0a84ff" stroke-width="9" class="ring-val"
+                  stroke-dasharray="232.5" stroke-dashoffset="166.0"></circle>
+
+                <!-- Ring 3: Leadership Affirmation (50%) -> r=26, C=163.4 -->
+                <circle cx="60" cy="60" r="26" stroke="#ff9f0a" stroke-width="9" class="ring-bg"></circle>
+                <circle cx="60" cy="60" r="26" stroke="#ff9f0a" stroke-width="9" class="ring-val"
+                  stroke-dasharray="163.4" stroke-dashoffset="81.7"></circle>
+              </svg>
+              <!-- Center Metric -->
+              <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <span class="text-2xl font-black tracking-tight text-white text-apple-heading">4.14</span>
+                <span class="text-[10px] font-bold uppercase text-[#86868b] tracking-wider">Average</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ring Labels -->
+          <div class="space-y-1.5 pt-3 border-t border-white/5 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-2 text-slate-300"><span class="w-2.5 h-2.5 rounded-full bg-[#30d158]"></span> 5★ Excitement</span>
+              <span class="font-bold text-white text-apple-heading">75.0%</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-2 text-slate-300"><span class="w-2.5 h-2.5 rounded-full bg-[#0a84ff]"></span> Identified Staff</span>
+              <span class="font-bold text-white text-apple-heading">28.6%</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-2 text-slate-300"><span class="w-2.5 h-2.5 rounded-full bg-[#ff9f0a]"></span> Leadership Trust</span>
+              <span class="font-bold text-white text-apple-heading">50.0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento Card 2: Interactive Timeline (May to September Trend) -->
+        <div class="apple-glass-card rounded-3xl p-6 md:col-span-2 lg:col-span-2 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-xs font-semibold text-[#86868b] uppercase tracking-wider">Timeline Trajectory</span>
+                <h3 class="text-xl font-bold text-white text-apple-heading mt-0.5">Sentiment Shift: May &rarr; Sept 2026</h3>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-[#0a84ff]/10 text-[#0a84ff] border border-[#0a84ff]/20">
+                2 Phases Detected
+              </span>
+            </div>
+            <p class="text-xs text-[#86868b] text-apple-sub mt-1">
+              Transition from early office excitement to mid-year policy enforcement requests.
+            </p>
+
+            <!-- Apple-Style Rounded Bar Trend -->
+            <div class="h-44 my-4 flex items-end gap-3 pt-6 px-1 border-b border-white/5">
+              
+              <!-- May 1-4 -->
+              <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+                <span class="text-[11px] font-bold text-[#30d158]">15</span>
+                <div class="w-full bg-[#30d158] rounded-2xl group-hover:opacity-90 transition-all shadow-lg shadow-[#30d158]/20" style="height: 75%;"></div>
+                <span class="text-[11px] font-medium text-[#86868b]">Early May</span>
+              </div>
+
+              <!-- May 6-28 -->
+              <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+                <span class="text-[11px] font-bold text-[#30d158]">5</span>
+                <div class="w-full bg-[#30d158] rounded-2xl group-hover:opacity-90 transition-all shadow-lg shadow-[#30d158]/20" style="height: 25%;"></div>
+                <span class="text-[11px] font-medium text-[#86868b]">Late May</span>
+              </div>
+
+              <!-- June -->
+              <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end opacity-25">
+                <span class="text-[11px] font-medium text-[#86868b]">0</span>
+                <div class="w-full bg-white/10 rounded-2xl" style="height: 4px;"></div>
+                <span class="text-[11px] font-medium text-[#86868b]">June</span>
+              </div>
+
+              <!-- July -->
+              <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+                <span class="text-[11px] font-bold text-[#ff375f]">3</span>
+                <div class="w-full bg-[#ff375f] rounded-2xl group-hover:opacity-90 transition-all shadow-lg shadow-[#ff375f]/20" style="height: 18%;"></div>
+                <span class="text-[11px] font-medium text-[#86868b]">July</span>
+              </div>
+
+              <!-- August -->
+              <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+                <span class="text-[11px] font-bold text-[#ff9f0a]">3</span>
+                <div class="w-full bg-gradient-to-t from-[#ff375f] to-[#30d158] rounded-2xl group-hover:opacity-90 transition-all" style="height: 18%;"></div>
+                <span class="text-[11px] font-medium text-[#86868b]">August</span>
+              </div>
+
+              <!-- September -->
+              <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+                <span class="text-[11px] font-bold text-[#ff375f]">2</span>
+                <div class="w-full bg-[#ff375f] rounded-2xl group-hover:opacity-90 transition-all shadow-lg shadow-[#ff375f]/20" style="height: 12%;"></div>
+                <span class="text-[11px] font-medium text-[#86868b]">Sept</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bottom Timeline Highlights -->
+          <div class="grid grid-cols-2 gap-3 text-xs pt-1">
+            <div class="p-3 rounded-2xl bg-white/[0.03] bg-apple-inset border border-white/5">
+              <span class="text-[#30d158] font-bold block mb-0.5">May Office Move (20 Entries)</span>
+              <p class="text-[#86868b] leading-tight">Requests for chairs, legroom, silent zones, and smart TVs.</p>
+            </div>
+            <div class="p-3 rounded-2xl bg-white/[0.03] bg-apple-inset border border-white/5">
+              <span class="text-[#ff375f] font-bold block mb-0.5">July–Sept Culture (8 Entries)</span>
+              <p class="text-[#86868b] leading-tight">Requests for strict punctuality, clear leave processing, and noise rules.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento Card 3: Key Themes Pill Stack -->
+        <div class="apple-glass-card rounded-3xl p-6 md:col-span-3 lg:col-span-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs font-semibold text-[#86868b] uppercase tracking-wider">
+              <span>Category Focus</span>
+              <span class="text-white text-apple-heading font-bold">NLP Tagged</span>
+            </div>
+            <h4 class="text-base font-bold text-white text-apple-heading mt-0.5">Major Topic Drivers</h4>
+            <p class="text-xs text-[#86868b] mt-0.5">Click any topic to filter submissions instantly</p>
+
+            <div class="mt-4 space-y-3">
+              <!-- Topic 1 -->
+              <div class="cursor-pointer group" onclick="setTagFilter('HR & Policies')">
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-slate-300 font-medium group-hover:text-[#ff375f] transition">HR & Attendance</span>
+                  <span class="font-bold text-[#ff375f]">17 (60.7%)</span>
+                </div>
+                <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                  <div class="h-full bg-[#ff375f] rounded-full" style="width: 60.7%"></div>
+                </div>
+              </div>
+
+              <!-- Topic 2 -->
+              <div class="cursor-pointer group" onclick="setTagFilter('Office & Facilities')">
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-slate-300 font-medium group-hover:text-[#0a84ff] transition">Facilities & Noise</span>
+                  <span class="font-bold text-[#0a84ff]">13 (46.4%)</span>
+                </div>
+                <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                  <div class="h-full bg-[#0a84ff] rounded-full" style="width: 46.4%"></div>
+                </div>
+              </div>
+
+              <!-- Topic 3 -->
+              <div class="cursor-pointer group" onclick="setTagFilter('Culture & Conduct')">
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-slate-300 font-medium group-hover:text-[#bf5af2] transition">Culture & Conduct</span>
+                  <span class="font-bold text-[#bf5af2]">13 (46.4%)</span>
+                </div>
+                <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                  <div class="h-full bg-[#bf5af2] rounded-full" style="width: 46.4%"></div>
+                </div>
+              </div>
+
+              <!-- Topic 4 -->
+              <div class="cursor-pointer group" onclick="setTagFilter('Leadership & Mgmt')">
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-slate-300 font-medium group-hover:text-[#30d158] transition">Leadership (Positive)</span>
+                  <span class="font-bold text-[#30d158]">14 (50.0%)</span>
+                </div>
+                <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                  <div class="h-full bg-[#30d158] rounded-full" style="width: 50.0%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-white/5 text-[11px] text-[#86868b] flex items-center justify-between">
+            <span>28 Total Submissions</span>
+            <span class="text-[#0071e3] font-medium">Auto-Categorized</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Apple Segmented Filter Bar -->
+      <section class="apple-glass-card rounded-2xl p-4 shadow-sm space-y-3">
+        <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+          
+          <!-- Apple Search Field -->
+          <div class="relative flex-1">
+            <input type="text" id="searchInput" placeholder="Search feedback, submitter name, keywords (e.g. chair, music, HR, leave)..."
+              class="w-full bg-[#1c1c1e] bg-apple-inset border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-[#f5f5f7] placeholder-[#86868b] focus:outline-none focus:ring-2 focus:ring-[#0071e3] focus:border-transparent transition"
+              oninput="handleSearch()">
+            <svg class="w-4 h-4 absolute left-3.5 top-3 text-[#86868b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+
+          <!-- Sort Select -->
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-[#86868b] font-medium">Sort:</span>
+            <select id="sortSelect" onchange="handleSort()" class="bg-[#1c1c1e] bg-apple-inset border border-white/10 rounded-xl px-3 py-2 text-xs text-[#f5f5f7] focus:outline-none focus:ring-2 focus:ring-[#0071e3] transition">
+              <option value="newest">Latest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="rating-desc">Rating: High to Low</option>
+              <option value="rating-asc">Rating: Low to High</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Filter Segmented Chips -->
+        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-white/5">
+          <span class="text-xs font-semibold text-[#86868b] mr-1">Rating:</span>
+          <div class="inline-flex p-0.5 rounded-xl bg-[#1c1c1e] bg-apple-inset border border-white/5 text-xs">
+            <button onclick="setRatingFilter('all')" id="btn-rating-all" class="px-2.5 py-1 rounded-lg text-white bg-[#0071e3] font-medium transition">All (28)</button>
+            <button onclick="setRatingFilter(5)" id="btn-rating-5" class="px-2.5 py-1 rounded-lg text-[#86868b] hover:text-white transition">5★ (21)</button>
+            <button onclick="setRatingFilter(2)" id="btn-rating-2" class="px-2.5 py-1 rounded-lg text-[#86868b] hover:text-white transition">2★ (1)</button>
+            <button onclick="setRatingFilter(1)" id="btn-rating-1" class="px-2.5 py-1 rounded-lg text-[#86868b] hover:text-white transition">1★ (6)</button>
+          </div>
+
+          <span class="text-xs font-semibold text-[#86868b] mx-2 text-white/20">|</span>
+
+          <span class="text-xs font-semibold text-[#86868b] mr-1">Topic:</span>
+          <div class="inline-flex p-0.5 rounded-xl bg-[#1c1c1e] bg-apple-inset border border-white/5 text-xs">
+            <button onclick="setTagFilter('all')" id="btn-tag-all" class="px-2.5 py-1 rounded-lg text-white bg-[#0071e3] font-medium transition">All</button>
+            <button onclick="setTagFilter('Office & Facilities')" id="btn-tag-office" class="px-2.5 py-1 rounded-lg text-[#86868b] hover:text-white transition">Facilities</button>
+            <button onclick="setTagFilter('HR & Policies')" id="btn-tag-hr" class="px-2.5 py-1 rounded-lg text-[#86868b] hover:text-white transition">HR & Policies</button>
+            <button onclick="setTagFilter('Culture & Conduct')" id="btn-tag-culture" class="px-2.5 py-1 rounded-lg text-[#86868b] hover:text-white transition">Culture</button>
+            <button onclick="setTagFilter('Leadership & Mgmt')" id="btn-tag-mgmt" class="px-2.5 py-1 rounded-lg text-[#86868b] hover:text-white transition">Leadership</button>
+          </div>
+
+          <span class="text-xs font-semibold text-[#86868b] mx-2 text-white/20">|</span>
+
+          <span class="text-xs font-semibold text-[#86868b] mr-1">Author:</span>
+          <div class="inline-flex p-0.5 rounded-xl bg-[#1c1c1e] bg-apple-inset border border-white/5 text-xs">
+            <button onclick="setAnonFilter('all')" id="btn-anon-all" class="px-2.5 py-1 rounded-lg text-white bg-[#0071e3] font-medium transition">All</button>
+            <button onclick="setAnonFilter('named')" id="btn-anon-named" class="px-2.5 py-1 rounded-lg text-[#86868b] hover:text-white transition">Named (8)</button>
+            <button onclick="setAnonFilter('anon')" id="btn-anon-anon" class="px-2.5 py-1 rounded-lg text-[#86868b] hover:text-white transition">Anonymous (20)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Submissions Grid -->
+      <section class="space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-[#86868b]">
+              Submissions Feed
+            </h2>
+            <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-[#0071e3]/10 text-[#0071e3] border border-[#0071e3]/20" id="filtered-count">
+              28
+            </span>
+          </div>
+          <span class="text-xs text-[#86868b]">Select any card to inspect full feedback details</span>
+        </div>
+
+        <div id="cardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Rendered by JavaScript -->
+        </div>
+
+        <div id="noResults" class="hidden text-center py-16 apple-glass-card rounded-3xl border border-white/5">
+          <p class="text-base font-semibold text-white text-apple-heading">No matching feedback entries</p>
+          <p class="text-xs text-[#86868b] mt-1">Try resetting filters or adjusting search parameters.</p>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Apple Sheet Modal -->
+  <div id="modalBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4 transition-all duration-300" onclick="closeModal(event)">
+    <div class="apple-glass rounded-3xl max-w-2xl w-full max-h-[88vh] overflow-hidden flex flex-col shadow-2xl border border-white/10" onclick="event.stopPropagation()">
+      
+      <!-- Apple Drag Handle Bar -->
+      <div class="w-12 h-1 bg-white/20 rounded-full mx-auto mt-3 mb-1"></div>
+
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-white/10 flex items-start justify-between">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2.5">
+            <span id="modalRatingBadge" class="px-2.5 py-1 rounded-full text-xs font-bold"></span>
+            <h3 id="modalName" class="text-lg font-bold text-white text-apple-heading"></h3>
+            <span id="modalId" class="text-xs text-[#86868b] font-mono"></span>
+          </div>
+          <div class="flex items-center gap-3 text-xs text-[#86868b]">
+            <span id="modalDate"></span>
+            <span>&bull;</span>
+            <span id="modalDevice"></span>
+          </div>
+        </div>
+        <button onclick="closeModalDirect()" class="text-[#86868b] hover:text-white p-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="px-6 py-5 overflow-y-auto space-y-5 text-sm">
+        
+        <!-- Tags -->
+        <div id="modalTags" class="flex flex-wrap gap-1.5"></div>
+
+        <!-- General Feedback -->
+        <div class="space-y-2">
+          <div class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0a84ff]">
+            <span>💬</span> General Feedback & Office Ideas
+          </div>
+          <div id="modalGenFeedback" class="bg-[#1c1c1e] bg-apple-inset p-4 rounded-2xl border border-white/5 text-[#f5f5f7] whitespace-pre-wrap leading-relaxed text-xs"></div>
+        </div>
+
+        <!-- HR Complaints -->
+        <div class="space-y-2">
+          <div class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#ff375f]">
+            <span>📋</span> HR Department Feedback / Grievance
+          </div>
+          <div id="modalHrComplaint" class="bg-[#1c1c1e] bg-apple-inset p-4 rounded-2xl border border-white/5 text-[#f5f5f7] whitespace-pre-wrap leading-relaxed text-xs"></div>
+        </div>
+
+        <!-- Management Complaints -->
+        <div class="space-y-2">
+          <div class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#ff9f0a]">
+            <span>🏛️</span> Management & Leadership Feedback
+          </div>
+          <div id="modalMgmtComplaint" class="bg-[#1c1c1e] bg-apple-inset p-4 rounded-2xl border border-white/5 text-[#f5f5f7] whitespace-pre-wrap leading-relaxed text-xs"></div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 border-t border-white/10 flex justify-end">
+        <button onclick="closeModalDirect()" class="px-4 py-2 bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs font-semibold rounded-full shadow transition">
+          Done
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const rawData = [{"id": 3, "name": null, "excitement_rating": 1, "general_feedback": "test", "hr_complaint": "testtttt  HR Department", "management_complaint": "HR Department test", "submitted_at": "2026-05-01 15:56:00", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["HR & Policies"], "is_anonymous": true}, {"id": 4, "name": "😎🫡", "excitement_rating": 5, "general_feedback": "❤️", "hr_complaint": "❌", "management_complaint": "❌", "submitted_at": "2026-05-01 16:40:46", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["General"], "is_anonymous": false}, {"id": 5, "name": "Raj Zinzuvadiya", "excitement_rating": 5, "general_feedback": "Auto Spree machine in the wall Attached", "hr_complaint": "", "management_complaint": "", "submitted_at": "2026-05-01 17:04:18", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["General"], "is_anonymous": false}, {"id": 6, "name": "Jiten Prajapati", "excitement_rating": 5, "general_feedback": "Thank you for asking our feedback. I have two suggestions.\n\nIt would be great if new desk provide more legroom for better comfort.\n\nHaving a extra space near the desk or a general area in the office to put bag would be additionally good.", "hr_complaint": "", "management_complaint": "", "submitted_at": "2026-05-01 17:16:45", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities"], "is_anonymous": false}, {"id": 7, "name": "Hu karan 😁", "excitement_rating": 5, "general_feedback": "->Hmmm, not much, just very much excited for new office, new space, as discussed everything will be solved. One suggestion from sales side is if we can purchase web cam's for PC, so if client's says urgent meeting or if we want to take meeting from PC will be possible. so we don't have to do files here and there. \n\n-> And if we can maintain more silence in new office 🤣\n\n-> And yes, if you guys can provide me an early leave off 15 mins, because am not able to catch my regular bus, so just want to leave off 15 mins early, if you can allow 👉👈", "hr_complaint": "", "management_complaint": "", "submitted_at": "2026-05-01 17:37:50", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities", "HR & Policies", "Leadership & Mgmt"], "is_anonymous": false}, {"id": 8, "name": "Hetun J", "excitement_rating": 5, "general_feedback": "Really excited about the new office, it looks like a nice, open space with good natural light.\n\nOne suggestion is to focus more on team activities during short breaks. We can have quick, mindful games or small activities to help people relax and interact more. It would be great if HR could take some initiative here and encourage participation so it becomes a regular part of the culture.\n\nAlso, since there will be a meeting room, I suggest having a big Android TV or smart screen installed. It can be used for presentations, design showcases, and discussions, but also for casual use during breaks.\n\nFor example, we could use it to watch short motivational content occasionally, or even stream something during lunch or break time. It would also be great for important matches especially big ones like India vs Pakistan or during World Cup time so the team can enjoy those moments together.\n\nIt can also be used for light gaming during short breaks, which would make the environment more fun and engaging.\n\nOverall, just a suggestion to make the office more interactive and enjoyable along with work.", "hr_complaint": "No major complaints, but I feel HR can improve on employee engagement. There should be more focus on encouraging team activities and creating opportunities for people to interact.\n\nEven small efforts in this area would make a positive difference in the overall work environment.", "management_complaint": "Honestly, no major complaints. The management team is very humble and supportive. I haven’t seen such a friendly and approachable team in my work life before.\n\nThat said, I feel there is a small area for improvement. Management could be a bit more structured and slightly stricter when it comes to employee engagement.\n\nFor example, having a weekly meeting with all teams would be really helpful. It would give everyone a chance to share ideas, help management understand employee perspectives better, and also keep track of ongoing work more effectively.\n\nOverall, just a suggestion to improve communication and engagement across the team.", "submitted_at": "2026-05-01 17:55:24", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities", "HR & Policies", "Culture & Conduct", "Leadership & Mgmt"], "is_anonymous": false}, {"id": 9, "name": "Devang", "excitement_rating": 5, "general_feedback": "Comfortable chair with headrest, Power backup", "hr_complaint": "", "management_complaint": "", "submitted_at": "2026-05-01 18:31:47", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities"], "is_anonymous": false}, {"id": 10, "name": null, "excitement_rating": 5, "general_feedback": "Office ma light khali per person set kari sakay. Music light vagadi ane noise ochu hoy to vadhu focus thase. Ghani var mathu dukhi jay chhe ane bov noisy thai jay che. Badha pase headphone che pan koi vaparta nathi.\n\nnew office ma no music with speaker better option if possible medam/sir", "hr_complaint": "Thodi complaints che:\n\n1. Rules badha mate same hova joiye. HR madam pote moda aave che, to ame badha kem vela aavsu? ( medam moda aave tye all jdg na group ma message pan nathi nakhta ) \n2. HR madam pote pan phone vapre che.\n3. Office ma ghana badha loko haji pan Insta scroll kare 6e na payda pachi.\n4. Possible hoy to badha na 8 hours pura thava joiye. Mane khyal che ke ghana loko moda aave che, pan to pan 6:30 e update nakhi de che.", "management_complaint": "Management team helpful ane supportive che, badhu saru che, pan thodu strict thavani jarur che. Rules badha mate apply karva joiye, ane office ma fun activities ma pan participate karvu joiye.", "submitted_at": "2026-05-04 10:10:29", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities", "HR & Policies", "Culture & Conduct", "Leadership & Mgmt"], "is_anonymous": true}, {"id": 11, "name": "team jdg", "excitement_rating": 5, "general_feedback": "I’m looking forward to a more comfortable and productive workspace in the new office. It would be great to have better seating, quiet zones for focused work, and collaborative spaces for team discussions. Also, ensuring proper facilities like clean rest areas and reliable internet will make a big difference. Clear communication about the move timeline and setup would help everyone prepare better.", "hr_complaint": "I’ve noticed that punctuality is not always consistent, and it would be better if the same rules applied equally to everyone. At times, it also feels like there may be some favoritism toward certain individuals, which can affect team morale.\n\n\nThat said, HR has been supportive overall. I would suggest organizing small team events to improve engagement and collaboration. Additionally, being more consistent and strict with attendance policies and the 8-hour shift requirement would help maintain fairness across the team.\n\nOverall, HR has approved my leave requests whenever needed, which I appreciate. Thank you for the support.", "management_complaint": "The management team is approachable and friendly, which is positive. However, in some cases, this flexibility leads to people taking advantage of the environment.\n\nThere should be stricter enforcement of office rules to maintain discipline. For example, excessive phone usage during working hours is common, and clearer restrictions or guidelines would help improve focus. Additionally, late arrivals (after 9:10 AM) should have defined consequences, such as a half-day deduction, to ensure consistency.\n\nIn my previous workplace, a stricter environment helped everyone follow the rules more consistently. Implementing similar discipline—such as limiting phone usage in the new office and applying firm attendance policies—could improve overall productivity and fairness.", "submitted_at": "2026-05-04 10:19:59", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities", "HR & Policies", "Culture & Conduct", "Leadership & Mgmt"], "is_anonymous": false}, {"id": 12, "name": null, "excitement_rating": 5, "general_feedback": "no Suggestions all is good and beutiful", "hr_complaint": "she needs to be bit strict about the rules \nif possible change office time from 10 to 7:00 ( if possible )", "management_complaint": "no complaints , one complaint all sir and ma'am are more than enogh humble and supportive", "submitted_at": "2026-05-04 11:16:44", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["HR & Policies", "Leadership & Mgmt"], "is_anonymous": true}, {"id": 13, "name": null, "excitement_rating": 5, "general_feedback": "new system , with better internet and invertor for power backup\nif possible system with bluetooth to use headphones and all", "hr_complaint": "everyone is using phone in office including hr ma'am\ni'm daily full filing my 8 hours but not others and 4/5 people are still coming late daily and login out at 6:30 which is not good \nif we can provide some better solution for this will be really great help \ntoo many people are taking fake leavs and WFH and i'm aware of same but may be we can make it systmised", "management_complaint": "no complaints about Management\nhapppy to have bosses like this which i never seen in my past companies \nI would love to help whenever needed for team", "submitted_at": "2026-05-04 11:29:05", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities", "HR & Policies", "Culture & Conduct", "Leadership & Mgmt"], "is_anonymous": true}, {"id": 14, "name": null, "excitement_rating": 5, "general_feedback": "too many Suggestions as a honest person for office and company\nsorry for all feedback but i just want k aapni company rajkot ni best company bane , rajkot nai india ni best \n\n1. sheetal medam ne ek ne j light no vandho 6e so aemni place aevi rakhjo new office ma badha thi alag\n2. shivraj sir bov badhu bole chee , aene aavde che pan husiyari aetli j kre che ( je na karavu joy ideally)\n3. office ma almost ghana badha phone vapre che and personal kam kre che\n- harmi medam and khushali medam savare timer no hoy tye time pass j kre che\n- sheetal medam kam sivay na kam ma vadhu ras rakhe che\n- shivraj sir to insta scroll kre , whstaupp kre \n- manan sir whatsapp and insta\n- devang sir and nava sir aayva ae bey kayarek kayrek vapre che have bija ne joy ne \n- hetun sir insta , linkeidn , whstaupp , personal talk \n- hr medam whtsapp , shopping , perosal work on office time , call with fridns and 20/30 minutes mate bar chalu kam ma \n- karan sir insta ma reels mokle che chalu kam ae notificaion aave che\n- priyanshi medam kayrek whstaupp vapre che\n- hu pote pan vapru j chu becuase bdahd vapre j che\n\npela i was coming on time pan have badha late j aave che to hu pan and koy  loko poclicy mantu j nathi hr medam pote late aave to aapne shu aem kri ne badhay late aavse \n\nhr medam game aene paid leave no aapvani hoy tye pan api dey che crosss check ntih karta", "hr_complaint": "hr medam rule badhay mate che tame follow kro and karavo aa badha tamne ignore kre che poan krava na joy\nmedam polite che and heping nature pan che", "management_complaint": "complaints aem to kai che nai pan Management team bov supportiv che and badha faydo lai le che\n\noffice ma vadhu aciticy bandh j kri devay no award , trip , party time are aavo time ae jav , no party kam thi kam\n\npossible hoy to koy nava stricky hr lai sakai to Management ne vache avu na pade badha matter ma\n\nbaki thank u sir and medam sorry but honest feedback aapu chu\ntame badha bov j sara cho", "submitted_at": "2026-05-04 11:42:25", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities", "HR & Policies", "Culture & Conduct", "Leadership & Mgmt"], "is_anonymous": true}, {"id": 15, "name": null, "excitement_rating": 5, "general_feedback": "new office ma ID card and t shirt farjiyat badha mate\r\nfriday na badha peri ne nathi aavta", "hr_complaint": "Leave policy ma kai fer thy sake to \r\nlike add options like early leave and extra leave and all", "management_complaint": "no complaints", "submitted_at": "2026-05-04 14:41:52", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["HR & Policies"], "is_anonymous": true}, {"id": 16, "name": null, "excitement_rating": 5, "general_feedback": "The seating arrangement should be organized team-wise—for example, keeping the development team together, the RG team together, and the SEO team together. This will help improve communication and coordination within teams and reduce confusion.\r\n\r\nAlso, there is an issue with loud music in the office, especially high-volume Gujarati or other songs. While playing music is fine, the volume should be kept at a decent level. Even when using headphones, the external noise becomes too loud, forcing us to increase headphone volume, which can lead to ear discomfort and potential health issues. Keeping the volume controlled would create a more comfortable and productive work environment.", "hr_complaint": "", "management_complaint": "", "submitted_at": "2026-05-04 18:12:18", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities", "Culture & Conduct"], "is_anonymous": true}, {"id": 17, "name": null, "excitement_rating": 5, "general_feedback": "", "hr_complaint": "", "management_complaint": "", "submitted_at": "2026-05-04 19:10:36", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["General"], "is_anonymous": true}, {"id": 18, "name": null, "excitement_rating": 5, "general_feedback": "Sitting management should be team wise.", "hr_complaint": "All Good here", "management_complaint": "All Good here", "submitted_at": "2026-05-06 09:17:22", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities", "Leadership & Mgmt"], "is_anonymous": true}, {"id": 19, "name": "Anonymous 🥷", "excitement_rating": 5, "general_feedback": "NO", "hr_complaint": "HR is very rude and egoistic 🥷", "management_complaint": "NO", "submitted_at": "2026-05-06 11:29:27", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["HR & Policies"], "is_anonymous": true}, {"id": 20, "name": "Vidita Pandya", "excitement_rating": 5, "general_feedback": "We can conduct a Monday session focused on sharing key learnings gained by everyone during the previous week.", "hr_complaint": "N/A", "management_complaint": "No any!", "submitted_at": "2026-05-06 11:31:11", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["General"], "is_anonymous": false}, {"id": 21, "name": "XYZ", "excitement_rating": 5, "general_feedback": "All good.\r\n\r\nPlease improve chairs.", "hr_complaint": "Vidita should improve her behavior.\r\n\r\nVery Bad Behavior.\r\n\r\nToo much egoistic and she is not fulfilling her responsibilities as HR.", "management_complaint": "All good.\r\n\r\nAll are very friendly and approchabe,", "submitted_at": "2026-05-06 11:37:41", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities", "HR & Policies", "Culture & Conduct"], "is_anonymous": true}, {"id": 22, "name": "Your Well-Wisher", "excitement_rating": 5, "general_feedback": "▶ The office environment feels too unorganized sometimes. Many people talk without proper respect or manners. This is not only about boys. Sometimes issues happen when girls get involved in different situations too. The problem is not one person only. It is with many people.\r\n\r\nOffice timing is 9:00 AM, but many people come at 9:30 AM regularly. Staying late is a different thing or if there is a genuine reason, that is understandable. But some people who can come on time still come late. Few days ago sir clearly told everyone to follow timings properly until we shift to the new office, but still it is not followed properly.\r\n\r\nEveryone’s behavior and work style should be noticed one by one so management can understand what is really happening in the office.\r\n_______________________________________________________________________________\r\n\r\n𝗧𝗵𝗲 𝗦𝘂𝗽𝗲𝗿 𝗚𝗿𝗲𝗮𝘁 𝗔𝗿𝘁𝗶 𝗠𝗮𝗺\r\n- There are many things about Arti mam. We sit peacefully in the office, but many things happen in the background that we later come to know about.\r\n- Arti mam takes work from home anytime. She stays negative in most activities and that negativity affects others too.\r\n- Arti mam creates misunderstandings between employees and plays office politics a lot.\r\n- The whole office already knows many things happening because of Arti mam.\r\n- She talks about people behind their backs on Instagram and other social media platforms while staying on the safe side herself.\r\n- She interferes too much in everyone’s personal life. Nobody understands why she needs to interfere in personal matters so much.\r\n- This should also be considered seriously because these personal interferences create hurt feelings and misunderstandings between employees.\r\n- Arti mam uses her phone a lot during office hours. Many times she keeps chatting with her husband, talking with Kevin, or attending personal calls.\r\n- Arti mam takes work from home too often.\r\n_______________________________________________________________________________\r\n𝗦𝗵𝗲𝗲𝘁𝗮𝗹 𝗠𝗮𝗺\r\n\r\n- There are not many complaints about Sheetal mam, but recently it was noticed that even when the AC makes noise or leaks water, it is still kept running.\r\n- She does not participate much in office activities or mix with the team. During the trip she herself said that if the company had fully sponsored the trip, she would have definitely come. Since personal money was involved, she was not interested.\r\n\r\n_______________________________________________________________________________\r\n𝗞𝗵𝘂𝘀𝗵𝗮𝗹𝗶 𝗠𝗮𝗺\r\n- Same with Khushali mam. She interferes a lot in people’s personal lives and talks unnecessarily about others. Whenever someone is absent from the office, she speaks negatively behind their back. This is a very bad habit.\r\n- There are very few manners in the way she talks. We manage it somehow, but many companies would not tolerate such behavior. She says whatever comes to her mind directly to anyone.\r\n- Khushali mam shows too much interest in everyone’s personal and office matters and keeps interrupting in conversations.\r\n\r\n_______________________________________________________________________________\r\n𝗦𝗵𝗶𝘃𝗿𝗮𝗷 𝗦𝗶𝗿\r\n-Shivraj sir orders things without management approval and later puts them in reimbursement. At least permission from sir or mam should be taken before ordering anything.\r\n-Request to notice that Shivraj sir also plays office politics in many matters.\r\n\r\n_______________________________________________________________________________\r\n𝗥𝗮𝗷 𝗦𝗶𝗿\r\n- Raj sir does a lot of fun and timepass in the office. If someone says something, he starts arguing. He still plays tabla. He comes late and does not follow timing properly. He also spends time on mobile.\r\n\r\n_______________________________________________________________________________\r\n𝗞𝗮𝗿𝗮𝗻 𝗦𝗶𝗿\r\n- Karan sir plays tabla, does timepass, and uses mobile often. Sometimes he talks casually without thinking.\r\n\r\n_______________________________________________________________________________\r\n𝗧𝗲𝗷𝗮𝘀 𝗦𝗶𝗿\r\n- Tejas sir spends a lot of time looking at Manan sir’s screen, using mobile, and talking with Manan sir and Shivraj sir. When Shivraj sir or Sheetal mam are explaining something to Manan sir, Tejas sir leaves his own work and gets involved there for timepass.\r\n- Request to keep proper attention on Tejas sir. Many times work gets done by Shivraj sir or Sheetal mam while Tejas sir himself does very little.\r\n\r\n_______________________________________________________________________________\r\n𝗠𝗮𝗻𝗮𝗻 𝗦𝗶𝗿\r\n- It feels like Manan sir works slowly sometimes. He does too much fun and casually says things to girls that may not feel appropriate.\r\n\r\n_______________________________________________________________________________\r\n𝗛𝗮𝗿𝗺𝗶 𝗠𝗮𝗺\r\n- Harmi mam works slowly. Sometimes there is too much fun and less work focus. Her work speed feels very slow, and she sometimes argues too much as well.\r\n\r\n_______________________________________________________________________________\r\n𝗗𝗲𝘃𝗮𝗻𝗴 𝗦𝗶𝗿\r\n- Moda ave 6e 9:30", "hr_complaint": "𝗢𝘂𝗿 𝗚𝗿𝗲𝗮𝘁 𝗛𝗥 𝗠𝗔𝗠\n▶ HR mam announces rules and discipline to everyone, but she herself comes late many times. After sir’s message about following timing strictly until the new office shift, the very next day she came late. When sir said something about it, her mood changed and she started reacting differently.\n▶ We do not know how much actual work happens during the day, but many of us noticed that HR mam spends a lot of time watching YouTube videos, podcasts, Samay Raina content, standups, and similar activities. Many times stock trading-related things are also open. Doing personal things is okay sometimes, but many HR responsibilities are forgotten unless someone reminds her. For example birthdays, cake management, etc.\n▶ Again the same pattern started with calls. She says candidate calls are there and goes away for long periods, then comes back later comfortably.\n▶HR mam’s Mac laptop stopped working, so a PC was arranged temporarily. Then we noticed the PC brightness cannot go very low, so she started bringing her personal laptop from home again. It feels like the reason is that she can continue personal activities comfortably with low brightness.\n▶Please notice one thing. Whenever HR mam comes late, many times she does not send a good morning message or logout message. You can check this in chats.\n▶HR mam listens to one person’s complaint and stops everyone based on that. That should not happen. Everyone’s side should be heard and majority understanding should matter. Listening to only one person and controlling everyone else feels like office politics.\n▶ Leave approvals and rejections are often delayed until the last moment. Employees should not have to remind HR again and again. I think checking the portal daily in the morning should be a regular habit. It is good that we have discussion groups, otherwise many things would be missed.\n▶ Sometimes HR mam goes inside for technical discussions, so management may feel she is working seriously, but after that again the same extra activities continue. It feels like sugarcoating.\n▶ HR mam stopped tabla playing, but she never clearly said who had the problem. The person who had the issue was directly telling us and we had already stopped it. So the question is whether someone actually complained or HR mam made the decision herself. This should be investigated properly.\n▶ First HR mam herself should stay disciplined. Then others will follow. Right now many people in the office say that if HR herself comes late, then how can she tell others about discipline?\n▶ If someone explains things to HR mam face to face or in messages, she gets upset, changes expressions, or starts arguing.\n▶ HR mam has stored company account credentials on her personal laptop. This creates privacy concerns for development, HR, and marketing accounts because the laptop goes home too. We are connected with many companies, so privacy should matter.\n▶ Because of this, now many employees are also saying they will bring personal laptops from home and work on them.\n▶ Request to properly observe HR mam’s activities because if things are not handled properly, management problems will increase.\n▶ HR mam sometimes breaks the same Monday or Friday rules that were given to employees.", "management_complaint": "ના", "submitted_at": "2026-05-06 12:29:14", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities", "HR & Policies", "Culture & Conduct", "Leadership & Mgmt"], "is_anonymous": true}, {"id": 23, "name": null, "excitement_rating": 5, "general_feedback": "One small suggestion from me – the salary gets credited around the 8th of every month at the moment. If it is possible to have the salary cycle nearer the beginning of the month, it would be really helpful, as it becomes easier for everyone to manage monthly dues and expenses.\r\n\r\nWe usually get client payments around the 5th of each month, but if there’s any way to make that easier or handle it internally, we’d be very grateful.", "hr_complaint": "", "management_complaint": "", "submitted_at": "2026-05-28 21:05:17", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["HR & Policies"], "is_anonymous": true}, {"id": 24, "name": null, "excitement_rating": 1, "general_feedback": "I have some feedback our hr department", "hr_complaint": "My Feedback Regarding the HR Department\r\n\r\nThese are my observations from the past few months. I am sharing them because I genuinely want the company to improve and succeed.\r\n\r\n1. Leave approvals are almost never processed on time. Employees constantly have to remind HR to approve leave requests. This should be a basic responsibility and should not require repeated follow-ups.\r\n\r\n2. Everyone is expected to be punctual, but the same standard is not being followed by HR. If punctuality is enforced for the team, it should start with the people responsible for enforcing it.\r\n\r\n3. HR gets offended over small conversations or constructive feedback. This makes employees uncomfortable sharing genuine concerns.\r\n\r\n4. I strongly believe the management should evaluate better HR options. We need someone who is balanced, unbiased, approachable, and capable of handling employee concerns professionally.\r\n\r\n5. I don't want to name anyone personally, but it is very evident that favoritism exists. Some employees receive better treatment, quicker approvals, and more support than others. This creates an unhealthy work environment.\r\n\r\n6. HR rarely listens to employees. Concerns are often ignored instead of being understood or resolved.\r\n\r\n7. This is not a personal issue, but something I have consistently observed. Whenever a new employee joins, HR is often late to the office. The first impression a new team member gets is that punctuality is not important. This sets the wrong example from day one.\r\n\r\n8. It is also disappointing to see HR spending more time socializing than working, while expecting everyone else to remain fully productive throughout the day. Leadership roles should set the benchmark, not lower it.\r\n\r\n9. These are not one-time incidents. These are repeated patterns that I have personally observed over the past several months.\r\n\r\n10. I genuinely want to continue working with this company for the long term. However, if these issues continue without any action, I will eventually have to look for better opportunities. A healthy work culture depends on fairness, accountability, and leadership by example.\r\n\r\n11. This is not just my opinion. Management can ask almost anyone in the company, and I believe they will hear similar concerns. These issues are common knowledge within the team.\r\n\r\n12. Candidate communication is another major concern. HR does not respond to interview candidates on time. Even a friend of mine interviewed here and still hasn't received a simple \"Yes\" or \"No.\" Leaving candidates waiting without any response reflects poorly on the company and damages our employer brand.\r\n\r\nI am sharing this feedback because I care about the company's future. I hope management treats these concerns seriously and takes corrective action instead of ignoring them.", "management_complaint": "I don't have any complaints about the management. It's more of a suggestion.\r\n\r\nYou all are doing a great job, but I would request that you take some time to understand what's actually happening across different departments.\r\n\r\nOne suggestion would be to ask every employee to share one positive point and one area for improvement about the HR department through anonymous feedback. I genuinely believe you'll notice the same concerns being raised repeatedly.\r\n\r\nFrom what I've observed, many people want to share their feedback but choose to stay silent because they feel nothing will change or they don't want to get involved.\r\n\r\nI feel this exercise would give management a much clearer picture of the actual situation and help improve the overall work culture.", "submitted_at": "2026-07-23 16:46:32", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["HR & Policies", "Culture & Conduct", "Leadership & Mgmt"], "is_anonymous": true}, {"id": 25, "name": "Anonymous", "excitement_rating": 1, "general_feedback": "", "hr_complaint": "I would like to express my disappointment regarding the way HR manages office events, discussions, and employee-related activities.\r\n\r\nIn most cases, decisions about office events or celebrations are made solely by HR along with Raj and Karan, without involving or consulting the rest of the employees. This creates a feeling that only a selected group is responsible for making decisions that affect everyone.\r\n\r\nAnother major concern is the handling of expenses. If an event is organized for the company, the expenses should ideally be covered by the company as office expense. If employees are expected to contribute financially, it should be communicated clearly in advance so that everyone is aware and can decide accordingly. Unfortunately, this is not the current practice. Employees are often informed only after the arrangements have already been made, and contributions are collected afterward without any prior discussion or transparency.\r\n\r\nThe same issue is evident when gifts are purchased. Although many employees contribute equally, recognition and appreciation are consistently given only to the same two or three individuals, making it appear as though they were solely responsible for the entire effort. The contributions of other employees are overlooked, even when they have contributed the same amount of time, effort, or money. This is demotivating and creates an unfair work environment.\r\n\r\nWhat is even more frustrating is that this pattern appears to be intentional. HR repeatedly plans and organizes activities with the same preferred group of people, makes all the decisions internally, and ensures that these individuals remain the visible faces of every event. This creates a culture of favoritism, where only a select few receive recognition while the contributions and opinions of others are ignored.\r\n\r\nI hope the company takes this feedback seriously and introduces a more transparent, inclusive, and fair process for organizing events, making decisions, and recognizing employee contributions. Every employee should have an equal opportunity to participate, be consulted where appropriate, and receive fair recognition for their contributions.", "management_complaint": "Same as above.", "submitted_at": "2026-07-30 13:07:43", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["HR & Policies"], "is_anonymous": true}, {"id": 26, "name": null, "excitement_rating": 1, "general_feedback": "", "hr_complaint": "1. She needs to be more considerate of everyone and treat all employees fairly.\r\n\r\n2. She is often rude and comes across as arrogant.\r\n\r\n3. She does not listen to others or consider their opinions.\r\n\r\n4. She does not consistently follow company rules and policies.\r\n\r\n5. She shares information with management in a way that appears to serve her own interests rather than being objective.\r\n\r\n6. She needs to improve her understanding of how an HR professional should communicate, handle employees, and maintain professionalism.", "management_complaint": "The HR is not communicating management's concerns accurately. Instead of conveying what management has actually said, she often adds her own opinions and presents them as if they are management's instructions. Because of this, employees should be cautious and verify information when necessary.\r\n\r\nManagement Team Be careful ⚠️⚠️", "submitted_at": "2026-07-30 16:21:21", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["HR & Policies", "Leadership & Mgmt"], "is_anonymous": true}, {"id": 27, "name": null, "excitement_rating": 5, "general_feedback": "Hi everyone, I wanted to raise something that has been affecting my focus and productivity lately.\n\nI’ve noticed that over the past couple of weeks, there has been quite a bit of music, noise, and non-work-related conversation throughout the day. I personally find it difficult to concentrate in that environment, and I know others may feel the same way.\n\nCould we please keep music to a limited period, perhaps around 2 hours a day, and keep the rest of the day relatively quiet so everyone can focus on their work?\n\nI completely understand the need for some fun and a relaxed atmosphere, but a quieter workspace for most of the day would really help those of us who prefer a productive environment.\n\nThanks for understanding and considering this.", "hr_complaint": "Please be strict about maintaining a professional office environment. We need to set clear expectations around respectful behavior and workplace culture.\r\n\r\nI’ve also heard that some people are speaking negatively about you and showing a lack of respect. I think it’s important to address this firmly and bring back a healthier, more respectful culture in the office.\r\n\r\nWe should make sure everyone understands that professionalism, respect, and a positive work environment are expected from everyone.", "management_complaint": "This is not really a complaint, but I would request that we bring back the positive and professional office culture we had before.\r\n\r\nLately, I’ve noticed that some people are not following the workplace rules, and these things don’t seem to be getting monitored consistently. I feel HR could be a little stricter and take appropriate action when rules are not being followed.\r\n\r\nMost importantly, please do something about the noise in the office. There is frequent music, talking, and unnecessary noise that makes it difficult to concentrate and be productive.\r\n\r\nI genuinely request that management take this seriously and help bring back a quieter, more respectful, and productive work environment.", "submitted_at": "2026-08-13 16:43:19", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["Office & Facilities", "HR & Policies", "Culture & Conduct", "Leadership & Mgmt"], "is_anonymous": true}, {"id": 28, "name": null, "excitement_rating": 1, "general_feedback": "", "hr_complaint": "I wanted to share something personal and sensitive that I’m not comfortable discussing in the group, but I feel it’s important to bring it to HR and management’s attention.\r\n\r\nSeveral girls have expressed that they do not feel comfortable or safe around Hetun Sir. From what I have personally observed and heard, he has made inappropriate advances toward girls and does not always show appropriate respect toward others.\r\n\r\nI have also heard him making negative comments about girls and speaking negatively about the company. I’ve spoken with some other girls about this, and they have shared similar concerns.\r\n\r\nI’m raising this because I believe these concerns should be taken seriously and looked into appropriately. I hope HR and management can review the situation and take any necessary action to ensure everyone feels safe, respected, and comfortable at work.\r\n\r\nI would appreciate this being handled sensitively and confidentially.", "management_complaint": "", "submitted_at": "2026-08-18 20:34:12", "ip_address": null, "user_agent": null, "device_type": null, "platform": null, "language": null, "timezone": null, "screen_size": null, "created_at": "2026-08-19 06:22:52", "tags": ["HR & Policies", "Culture & Conduct", "Leadership & Mgmt"], "is_anonymous": true}, {"id": 33, "name": null, "excitement_rating": 2, "general_feedback": "I would like to raise some concerns about the current workplace culture and team environment. My intention is not to blame any individual, but to highlight issues that are affecting employee morale, productivity, and the overall working environment.\r\n\r\n1. Team grouping and feeling left out\r\nThere seems to be increasing grouping within the team, which is making some people, including myself, feel left out. Decisions and discussions sometimes appear to happen within small groups rather than being communicated openly to everyone.\r\n\r\n2. Personal phone use and personal work during office hours\r\nMany employees are spending significant time on personal phone conversations, personal discussions, and personal work during working hours. This is affecting productivity and creating an unfair situation for people who are focused on their assigned responsibilities.\r\n\r\n3. Inconsistent implementation of rules\r\nThere are concerns that some workplace rules are not being followed consistently, including by HR. Rules are more effective when they apply equally to everyone, regardless of their role or position.\r\n\r\n4. Negative conversations and backbiting\r\nThere has been an increase in negative discussions about colleagues, backbiting, and rumours. This is creating mistrust and making the overall environment uncomfortable. We should encourage people to raise concerns directly and professionally rather than discussing colleagues negatively behind their backs.\r\n\r\n5. Rumours about employees and team changes\r\nThere are rumours that members of the SEO team and other employees may be removed and that management may be considering hiring or creating a new team. Even if these rumours are not true, the lack of clarity is creating unnecessary anxiety. Clear communication from management would help prevent speculation.\r\n\r\n6. Music and office environment decisions\r\nThe current music-related rules appear to have been decided primarily by a small group of people, including Raj, HR, Karan, and Sheetal, without broader discussion with the rest of the team. Decisions that affect the common working environment should ideally involve everyone or at least provide an opportunity for everyone to share their views.\r\n\r\n7. 3rd September leave discussion\r\nThere was also a discussion regarding leave on 3rd September the Satam holiday. My understanding is that Sheetal and HR initially wanted the leave arrangement, and it was later raised as an issue. I believe such decisions should be discussed transparently and consistently so that there is no confusion or perception of favouritism.\r\n\r\n8. Concerns regarding information about HR's previous workplace\r\nI have also come across some negative comments or information regarding our HR's conduct at a previous company. I do not want to spread rumours or make allegations without verification. However, if there are legitimate concerns that management should be aware of, I believe they should be reviewed confidentially and objectively through the appropriate process rather than discussed among employees.\r\n\r\n### What I Would Like to See\r\n\r\nI genuinely want to help improve the culture rather than contribute to the negativity. Ideally, we should work toward an environment where:\r\n\r\n* Everyone is treated fairly and equally.\r\n* Workplace rules apply consistently to everyone, including management and HR.\r\n* Personal work and excessive phone usage are limited during working hours.\r\n* Important decisions affecting the team are communicated openly.\r\n* Employees can raise concerns without fear of being excluded or targeted.\r\n* Gossip, backbiting, and rumours are discouraged.\r\n* Team members focus on productivity and their responsibilities during working hours.\r\n* There is more transparency around organisational or team changes.\r\n* Common-office decisions, such as music and working-environment rules, are discussed fairly with the wider team.\r\n\r\nMy main objective is to have a peaceful, professional, and productive workplace where everyone can focus on completing their eight hours of work effectively without unnecessary politics or distractions.\r\n\r\nI am raising these points because I care about the team and would genuinely like to see the culture improve. I hope management can look into these concerns objectively and help establish clearer, fairer, and consistently followed workplace practices.", "hr_complaint": "", "management_complaint": "", "submitted_at": "2026-08-20 20:58:30", "ip_address": "113.145.765.234", "user_agent": "Mozilla/5.0 (Linux; Android 14; CPH2573 Build/UKQ1.230924.001) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36", "device_type": "mobile", "platform": "Android", "language": "en-GB", "timezone": "Asia/Calcutta", "screen_size": "360x804", "created_at": "2026-08-20 15:28:30", "tags": ["Office & Facilities", "HR & Policies", "Culture & Conduct", "Leadership & Mgmt"], "is_anonymous": true}, {"id": 34, "name": null, "excitement_rating": 1, "general_feedback": "", "hr_complaint": "I wanted to raise a few concerns that I feel are still affecting the team environment and overall focus at work.\r\n\r\nI have noticed that there continues to be some influence and grouping around the HR and SEO teams. I have highlighted this concern multiple times, including during the meeting, and it appears that a few people are still supporting or participating in this dynamic. I wanted to bring this up again because I believe it is important to ensure that the situation is looked at objectively and that the SEO team, or the boys in the team, are not automatically considered to be at fault.\r\n\r\nI feel that HR is influencing people against the SEO team and supporting grouping within the team. This is still happening even after the discussion in the meeting.\r\n\r\nThere was also an instance during the Janmashtami festival where some discussions were held without the involvement of the full team, particularly regarding bringing things from home. I feel that discussions or decisions that involve the broader team should ideally be communicated openly and involve everyone concerned.\r\n\r\nAnother concern is that non-work-related discussions and activities are still happening frequently during working hours. This is affecting my ability to maintain focus, especially when I need uninterrupted time to work on tasks that require concentration. I believe it would be helpful if non-work-related conversations could be kept to break times as much as possible. I have also noticed that HR sometimes becomes involved in or contributes to these non-work-related discussions, which can further encourage them.\r\n\r\nI am raising these points not to blame any individual or group, but to ensure that the situation is handled fairly and that everyone has a professional and focused work environment.\r\n\r\nI would appreciate it if we could look at these concerns objectively and work toward a fair and practical solution that is best for the entire team.\r\n\r\nThanks, and I look forward to finding the best possible solution.", "management_complaint": "", "submitted_at": "2026-09-02 19:01:10", "ip_address": "143.135.762.233", "user_agent": "Mozilla/5.0 (Linux; Android 15; Mobile)\nAppleWebKit/537.36 (KHTML, like Gecko)\nChrome/151.0.0.0 Mobile Safari/537.36", "device_type": "mobile", "platform": "Android", "language": "en-GB", "timezone": "Asia/Calcutta", "screen_size": "1512x982", "created_at": "2026-09-02 13:31:10", "tags": ["Office & Facilities", "HR & Policies", "Culture & Conduct", "Leadership & Mgmt"], "is_anonymous": true}];
+
+    let activeRating = 'all';
+    let activeTag = 'all';
+    let activeAnon = 'all';
+    let searchQuery = '';
+    let sortMode = 'newest';
+
+    function init() {
+      renderCards();
+    }
+
+    function setTheme(theme) {
+      const html = document.documentElement;
+      const darkBtn = document.getElementById('theme-dark-btn');
+      const lightBtn = document.getElementById('theme-light-btn');
+
+      if (theme === 'light') {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        lightBtn.className = 'px-2.5 py-1 rounded-full text-black bg-black/10 font-medium transition';
+        darkBtn.className = 'px-2.5 py-1 rounded-full text-[#86868b] hover:text-black transition';
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        darkBtn.className = 'px-2.5 py-1 rounded-full text-white bg-white/10 font-medium transition';
+        lightBtn.className = 'px-2.5 py-1 rounded-full text-[#86868b] hover:text-white transition';
+      }
+    }
+
+    function getFilteredData() {
+      return rawData.filter(item => {
+        if (activeRating !== 'all' && item.excitement_rating !== Number(activeRating)) {
+          return false;
+        }
+        if (activeTag !== 'all' && (!item.tags || !item.tags.includes(activeTag))) {
+          return false;
+        }
+        if (activeAnon === 'named' && item.is_anonymous) return false;
+        if (activeAnon === 'anon' && !item.is_anonymous) return false;
+
+        if (searchQuery.trim() !== '') {
+          const q = searchQuery.toLowerCase();
+          const name = (item.name || '').toLowerCase();
+          const gen = (item.general_feedback || '').toLowerCase();
+          const hr = (item.hr_complaint || '').toLowerCase();
+          const mgmt = (item.management_complaint || '').toLowerCase();
+          if (!name.includes(q) && !gen.includes(q) && !hr.includes(q) && !mgmt.includes(q)) {
+            return false;
+          }
+        }
+
+        return true;
+      }).sort((a, b) => {
+        if (sortMode === 'newest') {
+          return (b.submitted_at || '').localeCompare(a.submitted_at || '');
+        } else if (sortMode === 'oldest') {
+          return (a.submitted_at || '').localeCompare(b.submitted_at || '');
+        } else if (sortMode === 'rating-desc') {
+          return b.excitement_rating - a.excitement_rating;
+        } else if (sortMode === 'rating-asc') {
+          return a.excitement_rating - b.excitement_rating;
+        }
+        return 0;
+      });
+    }
+
+    function renderCards() {
+      const data = getFilteredData();
+      const grid = document.getElementById('cardsGrid');
+      const counter = document.getElementById('filtered-count');
+      const noResults = document.getElementById('noResults');
+
+      counter.textContent = data.length;
+
+      if (data.length === 0) {
+        grid.innerHTML = '';
+        noResults.classList.remove('hidden');
+        return;
+      } else {
+        noResults.classList.add('hidden');
+      }
+
+      let html = '';
+      data.forEach(item => {
+        const isAnon = item.is_anonymous;
+        const name = item.name ? item.name : 'Anonymous';
+        const rating = item.excitement_rating;
+        
+        let ratingBadgeClass = 'bg-[#30d158]/10 text-[#30d158] border border-[#30d158]/20';
+        if (rating === 2) ratingBadgeClass = 'bg-[#ff9f0a]/10 text-[#ff9f0a] border border-[#ff9f0a]/20';
+        if (rating === 1) ratingBadgeClass = 'bg-[#ff375f]/10 text-[#ff375f] border border-[#ff375f]/20';
+
+        const tagBadges = (item.tags || []).map(t => `<span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-white/5 text-[#86868b] border border-white/5">${t}</span>`).join(' ');
+
+        const genText = item.general_feedback ? item.general_feedback.trim() : '';
+        const hrText = item.hr_complaint ? item.hr_complaint.trim() : '';
+        const mgmtText = item.management_complaint ? item.management_complaint.trim() : '';
+
+        let snippet = genText || hrText || mgmtText || 'No description entered.';
+        if (snippet.length > 150) {
+          snippet = snippet.substring(0, 150) + '...';
+        }
+
+        const dateStr = item.submitted_at ? item.submitted_at.substring(0, 10) : 'Unknown';
+
+        html += `
+          <div class="apple-glass-card rounded-3xl p-5 flex flex-col justify-between cursor-pointer group" onclick="openModal(${item.id})">
+            <div class="space-y-3">
+              <!-- Top Header -->
+              <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xs font-semibold ${isAnon ? 'text-[#86868b]' : 'text-[#0071e3]'}">
+                    ${isAnon ? '🥷' : '👤'}
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-semibold text-white text-apple-heading group-hover:text-[#0071e3] transition">${escapeHtml(name)}</h3>
+                    <p class="text-[11px] text-[#86868b]">${dateStr}</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold ${ratingBadgeClass}">
+                  ${rating} ★
+                </span>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1">
+                ${tagBadges}
+              </div>
+
+              <!-- Text Snippet -->
+              <p class="text-xs text-[#86868b] group-hover:text-slate-300 transition line-clamp-3 leading-relaxed">
+                ${escapeHtml(snippet)}
+              </p>
+            </div>
+
+            <!-- Footer -->
+            <div class="pt-3 mt-4 border-t border-white/5 flex items-center justify-between text-[11px] text-[#86868b]">
+              <div class="flex items-center gap-2">
+                ${item.hr_complaint && item.hr_complaint.trim() ? '<span class="text-[#ff375f] font-medium">⚠️ HR Note</span>' : ''}
+                ${item.device_type ? `<span class="px-1.5 py-0.5 rounded bg-white/5 text-[10px]">${item.device_type}</span>` : ''}
+              </div>
+              <span class="text-[#0071e3] font-medium group-hover:translate-x-0.5 transition">Details &rarr;</span>
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+    }
+
+    function openModal(id) {
+      const item = rawData.find(x => x.id === id);
+      if (!item) return;
+
+      const name = item.name ? item.name : 'Anonymous Staff Member';
+      const rating = item.excitement_rating;
+
+      document.getElementById('modalName').textContent = name;
+      document.getElementById('modalId').textContent = 'Submission #' + item.id;
+      document.getElementById('modalDate').textContent = 'Date: ' + (item.submitted_at || 'Unknown');
+      document.getElementById('modalDevice').textContent = (item.platform || 'Desktop') + ' • ' + (item.device_type || 'Web');
+
+      const badge = document.getElementById('modalRatingBadge');
+      badge.textContent = rating + ' ★ Rating';
+      if (rating === 5) {
+        badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-[#30d158]/10 text-[#30d158] border border-[#30d158]/20';
+      } else if (rating === 2) {
+        badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-[#ff9f0a]/10 text-[#ff9f0a] border border-[#ff9f0a]/20';
+      } else {
+        badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-[#ff375f]/10 text-[#ff375f] border border-[#ff375f]/20';
+      }
+
+      const tagsContainer = document.getElementById('modalTags');
+      tagsContainer.innerHTML = (item.tags || []).map(t => `<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-[#86868b] border border-white/5">${t}</span>`).join(' ');
+
+      const genEl = document.getElementById('modalGenFeedback');
+      genEl.textContent = item.general_feedback && item.general_feedback.trim() ? item.general_feedback : 'No general suggestions recorded.';
+
+      const hrEl = document.getElementById('modalHrComplaint');
+      hrEl.textContent = item.hr_complaint && item.hr_complaint.trim() ? item.hr_complaint : 'No HR complaints recorded.';
+
+      const mgmtEl = document.getElementById('modalMgmtComplaint');
+      mgmtEl.textContent = item.management_complaint && item.management_complaint.trim() ? item.management_complaint : 'No management feedback recorded.';
+
+      document.getElementById('modalBackdrop').classList.remove('hidden');
+    }
+
+    function closeModalDirect() {
+      document.getElementById('modalBackdrop').classList.add('hidden');
+    }
+
+    function closeModal(e) {
+      if (e.target.id === 'modalBackdrop') {
+        closeModalDirect();
+      }
+    }
+
+    function setRatingFilter(r) {
+      activeRating = r;
+      ['all', 5, 2, 1].forEach(val => {
+        const btn = document.getElementById('btn-rating-' + val);
+        if (val.toString() === r.toString()) {
+          btn.className = 'px-2.5 py-1 rounded-lg text-white bg-[#0071e3] font-medium transition';
+        } else {
+          btn.className = 'px-2.5 py-1 rounded-lg text-[#86868b] hover:text-white transition';
+        }
+      });
+      renderCards();
+    }
+
+    function setTagFilter(tag) {
+      activeTag = tag;
+      const tagMap = {
+        'all': 'btn-tag-all',
+        'Office & Facilities': 'btn-tag-office',
+        'HR & Policies': 'btn-tag-hr',
+        'Culture & Conduct': 'btn-tag-culture',
+        'Leadership & Mgmt': 'btn-tag-mgmt'
+      };
+      Object.keys(tagMap).forEach(key => {
+        const btn = document.getElementById(tagMap[key]);
+        if (key === tag) {
+          btn.className = 'px-2.5 py-1 rounded-lg text-white bg-[#0071e3] font-medium transition';
+        } else {
+          btn.className = 'px-2.5 py-1 rounded-lg text-[#86868b] hover:text-white transition';
+        }
+      });
+      renderCards();
+    }
+
+    function setAnonFilter(type) {
+      activeAnon = type;
+      ['all', 'named', 'anon'].forEach(val => {
+        const btn = document.getElementById('btn-anon-' + val);
+        if (val === type) {
+          btn.className = 'px-2.5 py-1 rounded-lg text-white bg-[#0071e3] font-medium transition';
+        } else {
+          btn.className = 'px-2.5 py-1 rounded-lg text-[#86868b] hover:text-white transition';
+        }
+      });
+      renderCards();
+    }
+
+    function handleSearch() {
+      searchQuery = document.getElementById('searchInput').value;
+      renderCards();
+    }
+
+    function handleSort() {
+      sortMode = document.getElementById('sortSelect').value;
+      renderCards();
+    }
+
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      searchQuery = '';
+      sortMode = 'newest';
+      document.getElementById('sortSelect').value = 'newest';
+      setRatingFilter('all');
+      setTagFilter('all');
+      setAnonFilter('all');
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
