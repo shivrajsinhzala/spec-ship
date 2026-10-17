@@ -50,7 +50,12 @@
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const frame = () => new Promise((r) => requestAnimationFrame(() => r()));
   const norm = (s) => String(s).replace(/\s+/g, ' ').trim();
-  const visible = (e) => e && e.offsetParent !== null;
+  // Not offsetParent: it is null for position:fixed elements such as the answer sheet's buttons.
+  const visible = (e) => {
+    if (!e || !e.isConnected || e.getClientRects().length === 0) return false;
+    const cs = getComputedStyle(e);
+    return cs.visibility !== 'hidden' && cs.display !== 'none';
+  };
 
   async function waitFor(fn, timeout = 8000, step = 25) {
     const t0 = performance.now();
@@ -117,43 +122,39 @@
     }
   }
 
-  // Pointer + mouse events, like a real mouse drag (the list uses pointer-based sorting).
-  async function dragTo(src, x1, y1, x2, y2) {
-    const base = { bubbles: true, cancelable: true, composed: true, view: window, button: 0, pointerId: 1,
-      pointerType: 'mouse', isPrimary: true };
-    const fire = (target, type, x, y, buttons) => {
-      const init = { ...base, clientX: x, clientY: y, buttons };
-      if (type.startsWith('pointer')) target.dispatchEvent(new PointerEvent(type, init));
-      else target.dispatchEvent(new MouseEvent(type, init));
-    };
-    // Press on whatever is really under the pointer, as a mouse would.
-    const target = document.elementFromPoint(x1, y1) || src;
-    fire(target, 'pointerdown', x1, y1, 1); fire(target, 'mousedown', x1, y1, 1);
-    const steps = 10;
-    for (let i = 1; i <= steps; i++) {
-      const x = x1 + ((x2 - x1) * i) / steps;
-      const y = y1 + ((y2 - y1) * i) / steps;
-      fire(document, 'pointermove', x, y, 1); fire(document, 'mousemove', x, y, 1);
-      await sleep(16);
-    }
-    await sleep(60);
-    fire(document, 'pointerup', x2, y2, 0); fire(document, 'mouseup', x2, y2, 0);
+  // The ordering list has no tap mode; it is a custom pointer drag. Its row reacts to pointerdown,
+  // but only starts listening for window pointermove after React re-renders, and it picks the drop
+  // slot by comparing the pointer's Y with the other rows' centres (which animate for 280 ms).
+  // So: press, wait for the listener, move to the slot, let the rows settle, nudge, release.
+  async function dragRow(row, x, y1, y2) {
+    const fire = (target, type, y, buttons) => target.dispatchEvent(new PointerEvent(type, {
+      bubbles: true, cancelable: true, composed: true, view: window, button: 0, buttons,
+      pointerId: 1, pointerType: 'mouse', isPrimary: true, clientX: x, clientY: y }));
+    const handle = row.firstElementChild || row;
+    fire(handle, 'pointerdown', y1, 1);
+    await frame(); await frame(); await sleep(30);
+    for (let i = 1; i <= 4; i++) { fire(window, 'pointermove', y1 + ((y2 - y1) * i) / 4, 1); await frame(); }
+    await sleep(320);
+    fire(window, 'pointermove', y2, 1);
+    await frame();
+    fire(window, 'pointerup', y2, 0);
   }
 
   async function fillOrder(q) {
     const want = q.answer.value;
-    const ids = () => Array.from(document.querySelectorAll('li[data-item-id]')).map((li) => li.dataset.itemId);
+    const rows = () => Array.from(document.querySelectorAll('li[data-item-id]'));
+    const ids = () => rows().map((li) => li.dataset.itemId);
     for (let i = 0; i < want.length; i++) {
       for (let attempt = 0; attempt < 3 && ids()[i] !== want[i]; attempt++) {
-        const items = Array.from(document.querySelectorAll('li[data-item-id]'));
+        if (attempt > 0) await sleep(300); // a failed try may leave rows mid-animation
+        const items = rows();
         const j = ids().indexOf(want[i]);
         const from = items[j].getBoundingClientRect();
         const to = items[i].getBoundingClientRect();
-        const x = from.left + from.width / 2;
-        const y1 = from.top + from.height / 2;
-        const y2 = to.top + to.height / 2 + (j > i ? -from.height / 3 : from.height / 3);
-        await dragTo(items[j], x, y1, x, y2);
-        await waitFor(() => ids()[i] === want[i], 600, 25).catch(() => {});
+        // A quarter-row past the target's centre lands in slot i and not beyond it.
+        const y2 = to.top + to.height / 2 + (j > i ? -to.height / 4 : to.height / 4);
+        await dragRow(items[j], from.left + from.width / 2, from.top + from.height / 2, y2);
+        await waitFor(() => ids()[i] === want[i], 800, 25).catch(() => {});
       }
       if (ids()[i] !== want[i]) throw new Error('could not reorder');
     }

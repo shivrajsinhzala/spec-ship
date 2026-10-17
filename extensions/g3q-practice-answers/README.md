@@ -9,5 +9,5 @@ It answers all 10 questions for you through the normal UI and shows the answers 
 3. Open the practice quiz. It starts automatically (untick "Auto-start on page load" in the panel to use the
    ▶ Auto-answer button instead; ■ Stop halts it).
 
-A full run takes about 40 s, mostly the site's own ~3 s pause after each submit.
+A full run takes about 35–40 s, mostly the site's own ~3 s pause after each submit.
 Practice mode only: it does nothing on other quizzes. See `docs/g3q-practice-quiz-context.md`.

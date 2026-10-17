@@ -110,16 +110,34 @@ default on, stored in `localStorage` key `g3q-auto-start`).
 
 How it answers (all via DOM events, no API calls of its own):
 - single choice / true-false: click the option button whose text equals the answer.
-- match: for each row, click the option pill, then the slot next to the row's label.
-- blanks: click the word pill, then the `___ N` slot.
-- ordering: synthetic pointer+mouse events (pointerdown on the element under the pointer, ~10 pointermove steps,
-  pointerup) on `li[data-item-id]`. Targeting the element under the pointer and moving in ~10 steps with
-  ~16 ms gaps is what made it work; firing straight at the `li` with 8 fast steps did not.
+- match: tap mode — click the option pill, then the slot next to the row's label.
+- blanks: tap mode — click the word pill, then the `___ N` slot.
+- ordering: **no tap mode** (tapping rows does nothing; verified), so it drags. The list is a custom drag, not a
+  library: each row's inner `div` has `onPointerDown`; only after React re-renders does the component add
+  `window` `pointermove`/`pointerup` listeners (checking `pointerId`), and it picks the drop slot by comparing the
+  pointer's Y with the other rows' centres via `getBoundingClientRect`, while rows animate for 280 ms after each
+  swap. The extension therefore: pointerdown on the row's div → wait 2 frames + 30 ms → 4 moves to a quarter-row
+  past the target's centre → wait 320 ms for the animation → one more move → pointerup. One drag per misplaced
+  item (selection-sort order), up to 3 tries each.
 - then click the visible, enabled submit button, wait for the sheet, click `આગલો પ્રશ્ન` / `પરિણામ જુઓ`.
+- Visibility check uses `getClientRects()` + computed style. Using `offsetParent` was a bug: it is `null` for
+  `position: fixed` elements, so at some window sizes the sheet's "next" button looked hidden and the run stalled.
 
-Timing: the site holds every submit for ~2.8–3.9 s ("checking…", no network). That is ~33–38 s of a run and the
-extension does **not** bypass it. Measured: one full run (page load → result page) took **38.3 s, 10/10, 100%**.
-Only one full run was measured after the ordering fix; earlier runs without ordering questions reached Q8/Q9.
+Timing: the site holds every submit for ~2.8–3.9 s ("checking…", no network). That is ~33 s of a run and the
+extension does **not** bypass it.
+
+Tested in **Chrome for Testing 155.0.8059.84** (official Chrome automation build; branded Chrome ignores
+`--load-extension`), page load → result page:
+
+| Window | Quiz | Result | Time |
+|---|---|---|---|
+| 430×900 | random set (2 ordering) | 10/10 | 38.1 s |
+| 1280×720 | random set (2 ordering) | 10/10 | 37.1 s |
+| 1920×1080 | random set (1 ordering) | 10/10 | 35.4 s |
+| 1280×720 | ordering questions first | 10/10 | 39.4 s |
+| 1366×768 | 5 ordering questions only | 5/5 | 26.4 s |
+
+~1.3 s fill per ordering question → worst case of 10 ordering questions ≈ 46 s.
 
 - **Scope: practice quiz only.** Runs on `https://quiz.g3q.ai/*` so it survives client-side navigation, but only
   captures `/api/practice-quiz` and only acts on `/practice-quiz`. Weekly/prize quiz endpoints are not read.
@@ -136,3 +154,4 @@ Install: `chrome://extensions` → Developer mode → **Load unpacked** → sele
 - 2026-10-17 — Initial exploration; documented API, question types, flow, edge cases; built the answer-overlay
   extension.
 - 2026-10-17 — Extension upgraded from answer overlay to auto-answer (fills + submits), 38.3 s full run.
+- 2026-10-17 — Fixed stalled "next" (offsetParent bug) and flaky ordering drags; tested in Chrome for Testing 155.
