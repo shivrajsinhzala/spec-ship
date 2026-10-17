@@ -103,17 +103,31 @@ To force an ordering question first, route `**/api/practice-quiz*` and reorder `
 
 ## Chrome extension — `extensions/g3q-practice-answers/`
 
-Manifest V3 content script (`world: "MAIN"`, `document_start`) that wraps `window.fetch`, keeps the practice
-quiz response, and draws a fixed panel (bottom-right, Hide/Show button) listing the answer for all 10 questions
-with the current question highlighted (current = `પ્રશ્ન N/10` read from the header, polled every 300 ms).
+Manifest V3 content script (`world: "MAIN"`, `document_start`). It wraps `window.fetch`, keeps the practice quiz
+response, then **answers the quiz through the normal UI** and shows the answers in a panel (bottom-left, with a
+status line, elapsed seconds, ▶ Auto-answer / ■ Stop, Hide, and an "Auto-start on page load" checkbox,
+default on, stored in `localStorage` key `g3q-auto-start`).
 
-- **Scope: practice quiz only.** It runs on `https://quiz.g3q.ai/*` so it still works after client-side navigation
-  from `/home`, but it only captures `/api/practice-quiz` and only draws on `/practice-quiz`. Weekly/prize quiz
-  endpoints are not read.
-- All text is inserted with `textContent` (the API text is never parsed as HTML).
-- Verified by loading it unpacked in Chromium: all 10 questions' answers rendered, Q1 highlighted.
-- Needs a fresh page load to capture data (the response is only seen when the app calls the API).
-- If the site changes the endpoint path or the response shape (`questions[].answer.value`), update `content.js`.
+How it answers (all via DOM events, no API calls of its own):
+- single choice / true-false: click the option button whose text equals the answer.
+- match: for each row, click the option pill, then the slot next to the row's label.
+- blanks: click the word pill, then the `___ N` slot.
+- ordering: synthetic pointer+mouse events (pointerdown on the element under the pointer, ~10 pointermove steps,
+  pointerup) on `li[data-item-id]`. Targeting the element under the pointer and moving in ~10 steps with
+  ~16 ms gaps is what made it work; firing straight at the `li` with 8 fast steps did not.
+- then click the visible, enabled submit button, wait for the sheet, click `આગલો પ્રશ્ન` / `પરિણામ જુઓ`.
+
+Timing: the site holds every submit for ~2.8–3.9 s ("checking…", no network). That is ~33–38 s of a run and the
+extension does **not** bypass it. Measured: one full run (page load → result page) took **38.3 s, 10/10, 100%**.
+Only one full run was measured after the ordering fix; earlier runs without ordering questions reached Q8/Q9.
+
+- **Scope: practice quiz only.** Runs on `https://quiz.g3q.ai/*` so it survives client-side navigation, but only
+  captures `/api/practice-quiz` and only acts on `/practice-quiz`. Weekly/prize quiz endpoints are not read.
+- Practice results are not sent to the server (only start/complete analytics events with no score).
+- All panel text is inserted with `textContent`.
+- If the site changes the endpoint, the response shape (`questions[].answer.value`) or the DOM hooks above
+  (`[data-quiz-question-card]`, `li[data-item-id]`, `[data-testid=quiz-submit-button]`, `.grid-cols-2`), update
+  `content.js`.
 
 Install: `chrome://extensions` → Developer mode → **Load unpacked** → select `extensions/g3q-practice-answers`.
 
@@ -121,3 +135,4 @@ Install: `chrome://extensions` → Developer mode → **Load unpacked** → sele
 
 - 2026-10-17 — Initial exploration; documented API, question types, flow, edge cases; built the answer-overlay
   extension.
+- 2026-10-17 — Extension upgraded from answer overlay to auto-answer (fills + submits), 38.3 s full run.
