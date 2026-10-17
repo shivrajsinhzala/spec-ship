@@ -76,8 +76,10 @@
   const buttonsIn = (root) => Array.from(root.querySelectorAll('button'));
   const submitBtn = () => Array.from(document.querySelectorAll('[data-testid=quiz-submit-button]'))
     .find((b) => visible(b) && !b.disabled);
+  // "Next question" / "View Result" in every UI language the site ships (en, hi, gu).
+  const NEXT_LABELS = /Next question|View Result|अगला प्रश्न|परिणाम देखें|આગલો પ્રશ્ન|પરિણામ જુઓ/i;
   const nextBtn = () => Array.from(document.querySelectorAll('button'))
-    .find((b) => visible(b) && /આગલો પ્રશ્ન|પરિણામ જુઓ/.test(b.textContent));
+    .find((b) => visible(b) && NEXT_LABELS.test(b.textContent));
 
   // Last button whose text equals `text` (slots show placed text first, option pills come last).
   const optionButton = (root, text) => {
@@ -177,22 +179,25 @@
     const myRun = runId;
     startedAt = performance.now();
     const tick = setInterval(() => render(), 200);
+    const skipped = [];
     try {
       await waitFor(() => location.pathname.startsWith(PRACTICE_PATH) && currentIndex() === 0 && card(), 15000);
       for (let idx = 0; idx < questions.length; idx++) {
         if (stopRequested || myRun !== runId) { status = 'Stopped'; return; }
         status = `Answering ${idx + 1}/${questions.length}…`;
         await waitFor(() => currentIndex() === idx && card() && !nextBtn(), 8000);
-        await answer(questions[idx]);
+        // A question the page can't take an answer for (e.g. Hindi blanks rendered without slots)
+        // is submitted as-is so the run carries on instead of stopping.
+        try { await answer(questions[idx]); } catch (e) { skipped.push(`Q${idx + 1}: ${e.message}`); }
         status = `Submitted ${idx + 1}/${questions.length}, waiting for the site's check…`;
-        await waitFor(submitBtn, 4000);
+        await waitFor(submitBtn, 4000).catch(() => { throw new Error(`Q${idx + 1} could not be answered`); });
         submitBtn().click();
         const nb = await waitFor(nextBtn, 15000);
         nb.click();
       }
       await waitFor(() => location.pathname.startsWith(RESULT_PATH), 8000).catch(() => {});
       finishedIn = (performance.now() - startedAt) / 1000;
-      status = `Done in ${finishedIn.toFixed(1)} s`;
+      status = `Done in ${finishedIn.toFixed(1)} s` + (skipped.length ? ` · not filled: ${skipped.join('; ')}` : '');
     } catch (e) {
       status = 'Stopped: ' + e.message;
     } finally {
@@ -209,7 +214,7 @@
       case 'true_false': return [o[a] ?? String(a)];
       case 'drag_drop': return a.map((id, i) => `${i + 1}. ${o[id]}`);
       case 'match_following': return Object.keys(a).map((l) => `${(q.targets || {})[l]}  →  ${o[a[l]]}`);
-      case 'drag_into_blanks': return Object.keys(a).map((b) => `ખાલી જગ્યા ${b.replace(/\D/g, '')}  →  ${o[a[b]]}`);
+      case 'drag_into_blanks': return Object.keys(a).map((b) => `Blank ${b.replace(/\D/g, '')}  →  ${o[a[b]]}`);
       default: return [JSON.stringify(a)];
     }
   }

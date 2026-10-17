@@ -39,6 +39,22 @@ every question, so the browser already holds all answers before the first one is
       "explanation": "…" } ] }
 ```
 
+## Languages
+
+The UI ships in English, Hindi and Gujarati. The choice is a zustand store persisted in `localStorage` as
+`ggq:v1:language` = `{"state":{"language":"en","hasChosenLanguage":true},"version":1}`, and the API is called
+with `?language=en|hi|gu`. Button labels from the site's i18n bundle:
+
+| key | en | hi | gu |
+|---|---|---|---|
+| `nextQuestion` | Next question | अगला प्रश्न | આગલો પ્રશ્ન |
+| `viewResult` | View Result | परिणाम देखें | પરિણામ જુઓ |
+| `submit` | Submit | सबमिट करें | સબમિટ કરો |
+
+**Site data bug (Hindi):** `drag_into_blanks` questions mark blanks as `{{B1}}` in English and Gujarati, but the
+Hindi data uses plain `____`, so the page renders no tappable slots and the question cannot be answered by
+anyone (verified on 6 Hindi blank questions across 4 fetches).
+
 ## Question types (`type` → `answer`)
 
 | `type` | UI | `answer.mode` / `value` |
@@ -119,7 +135,10 @@ How it answers (all via DOM events, no API calls of its own):
   swap. The extension therefore: pointerdown on the row's div → wait 2 frames + 30 ms → 4 moves to a quarter-row
   past the target's centre → wait 320 ms for the animation → one more move → pointerup. One drag per misplaced
   item (selection-sort order), up to 3 tries each.
-- then click the visible, enabled submit button, wait for the sheet, click `આગલો પ્રશ્ન` / `પરિણામ જુઓ`.
+- then click the visible, enabled submit button, wait for the sheet, click its next/result button (matched in
+  all three languages). Matching only the Gujarati labels was a bug: in English the run stopped on the first sheet.
+- if a question can't be filled (e.g. the Hindi blanks above), it is submitted as-is and listed in the panel's
+  final status, instead of stopping the run.
 - Visibility check uses `getClientRects()` + computed style. Using `offsetParent` was a bug: it is `null` for
   `position: fixed` elements, so at some window sizes the sheet's "next" button looked hidden and the run stalled.
 
@@ -155,3 +174,5 @@ Install: `chrome://extensions` → Developer mode → **Load unpacked** → sele
   extension.
 - 2026-10-17 — Extension upgraded from answer overlay to auto-answer (fills + submits), 38.3 s full run.
 - 2026-10-17 — Fixed stalled "next" (offsetParent bug) and flaky ordering drags; tested in Chrome for Testing 155.
+- 2026-10-17 — Next/result button matched in en/hi/gu (was Gujarati-only); unfillable questions are skipped.
+  English: 10/10 in ~38 s (Chrome 155). Hindi: completes, blanks questions unanswerable (site data).
