@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "G3Q Practice Answers",
+  "version": "1.0.0",
+  "description": "Shows the answers for the G3Q practice quiz (quiz.g3q.ai/practice-quiz) in an on-screen panel. Practice mode only.",
+  "content_scripts": [
+    {
+      "matches": ["https://quiz.g3q.ai/*"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ]
+}
